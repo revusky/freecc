@@ -1,0 +1,20 @@
+#!/bin/sh
+DIR=$(dirname $(realpath $0))
+BOOTSTRAP_FREECC_JAR=$DIR/freecc.jar
+FREECC_JAR=$DIR/../freecc.jar
+FREEMARKER_JAR=$DIR/freemarker.jar
+PATH_SEP=":"
+
+case $(uname) in CYGWIN*)
+  BOOTSTRAP_FREECC_JAR=$(cygpath -w $BOOTSTRAP_FREECC_JAR)
+  FREECC_JAR=$(cygpath -w $FREECC_JAR)
+  FREEMARKER_JAR=$(cygpath -w $FREEMARKER_JAR)
+  PATH_SEP=";";;	
+esac
+
+
+# If there is a generated freecc.jar in the base directory, use that, otherwise, use
+# the bootstrap freecc.jar that is in the bin directory.
+
+CLASSPATH="$FREECC_JAR$PATH_SEP$BOOTSTRAP_FREECC_JAR$PATH_SEP$FREEMARKER_JAR"
+java -ea -classpath "$CLASSPATH" org.visigoths.freecc.Main "$@" 

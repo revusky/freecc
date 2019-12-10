@@ -1,0 +1,80 @@
+<project name="freecc" default="jar" basedir=".">
+ <property name="compile.class.path"
+      value="bin/freemarker.jar:src/java"/>
+ <property name="bootstrap.class.path"
+           value="bin/freecc.jar:bin/freemarker.jar"/>
+	
+	
+<target name="init">
+	<echo>Please include the following in any bug report.</echo>
+    <echo>Ant Version: ${ant.version}</echo>
+	<echo>JDK Version: ${java.version}</echo>
+	<echo>Operating System: ${os.name}</echo>
+	<uptodate property="parser.uptodate"
+                 targetfile="src/java/org/visigoths/freecc/parser/FreeCCParser.java">
+	 <srcfiles dir="src/grammars" includes="*.freecc"/>
+	</uptodate>
+	<taskdef name="freecc-bootstrap" classname="org.visigoths.freecc.FreeCCAntTask" classpath="${bootstrap.class.path}"/>
+</target>
+
+<target name="parser-gen" depends="init" unless="parser.uptodate">
+        <!-- mkdir dir="src/java/org/visigoths/freecc/parser"/ -->
+ 	<freecc-bootstrap src="src/grammars/FreeCC.freecc"/>
+</target>
+
+<!-- Tramsforms DocBook XML to HTML -->
+<target name='docs'>
+    <taskdef name="transform" classname="freemarker.docgen.DocgenTransformTask" classpath="${compile.class.path}"/>
+    <mkdir dir="docs"/>
+    <transform
+            srcFile="src/docs/freecc-manual.xml"
+            outputDir="docs"
+    />
+</target>
+
+		
+	
+ <target name="compile" depends="parser-gen">
+  	<mkdir dir="build"/>
+    <javac srcdir="src/java" 
+ 	       destdir="build"
+ 	       deprecation="off"
+ 	       debug="on"
+ 	       optimize="off"
+    	   classpath="${compile.class.path}"
+    />
+    <copy todir="build/org/visigoths/freecc/output/java">
+      <fileset dir="src/templates/java">
+         <include name="*.ftl"/>
+      </fileset>
+    </copy>
+ </target>
+	
+ <target name="test" depends="jar">
+    <ant antfile="build.xml" dir="examples/java" target="clean"/>
+    <ant antfile="build.xml" dir="examples/java" target="test"/>
+    <ant antfile="build.xml" dir="examples/freemarker" target="clean"/>
+    <ant antfile="build.xml" dir="examples/freemarker" target="test"/>
+    <ant antfile="test.xml" target="all"  />
+ </target>
+	
+ <target name="jar" depends="compile">
+    <jar jarfile="freecc.jar" 
+    	 basedir="build" compress="true"/>
+ </target>
+	
+ <target name="clean">
+ 	<delete file="freecc.jar"/>
+ 	<delete dir="test.tmp"/>
+ 	<delete dir="build"/>
+        <delete dir="examples/java/javagrammar"/>
+        <delete dir="examples/freemarker/fel"/>
+        <delete dir="examples/freemarker/ftl"/>
+        <delete dir="src/java/org/visigoths/freecc/parser"/>
+    <!-- delete>
+      <fileset dir="src/java/org/visigoths/freecc/parser">
+         <include name="**/*.java"/>
+      </fileset>
+    </delete -->
+  </target>
+</project>

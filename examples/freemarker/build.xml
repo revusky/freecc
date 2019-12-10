@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+
+<project name="Java Parser" default="build" basedir=".">
+
+<target name="clean">
+    <delete dir="fel"/>
+     <delete dir="ftl"/>
+</target>
+
+<target name="init">
+     <taskdef name="freecc"
+              classname="org.visigoths.freecc.FreeCCAntTask"
+              classpath="../../freecc.jar:../../bin/freecc.jar:../../bin/freemarker.jar"
+     />
+   <mkdir dir="fel"/>
+   <mkdir dir="ftl"/>
+</target>
+
+<target name="build" depends="init">
+    <freecc src="FEL.freecc"/>
+    <freecc src="FTL.freecc"/>
+    <javac classpath="." debug="on" source="1.5" target="1.5" srcdir="."/>
+</target>
+
+<target name="test" depends="build">
+     <echo>Here is a really simple FEL example: 2+2</echo>
+     <java fork="true" failonerror="true" classname="fel.FELParser" inputstring="2+2"/>
+     <echo>Okay, a bit more complex example now: x.y.z(foo, &quot;bar&quot;)?upper_case</echo>
+     <java fork="true" failonerror="true" classname="fel.FELParser" inputstring='x.y.z(foo, "bar")?upper_case'/>
+	 <echo>Now let's try out the full FTL parser on the templates used in FreeCC</echo>
+     <java fork="true" failonerror="true" classname="ftl.FTLParser">
+     	 <arg value = "../../src/templates/java"/>
+	 </java>
+</target>
+
+</project>
