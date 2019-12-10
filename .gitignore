@@ -1,3 +1,8 @@
+/docs/*
+/build/*
+/freecc.jar
+/src/java/org/visigoths/freecc/parser/*
+
 # Compiled class file
 *.class
 
@@ -11,7 +16,7 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar
+# *.jar
 *.war
 *.nar
 *.ear
