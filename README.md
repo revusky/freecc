@@ -18,4 +18,5 @@ FreeCC is not very well documented at the moment. There is some rudimentary info
 
 It should be possible to check the code out and just do an ant build from the top directory, by just running ant. You should also be able to run a little test suite by running "ant test".
 
-If you are interested in this project, either as a user or as a developer, please do [write me](a href="mailto:revuskyNOSPAM@gmail.com").
+If you are interested in this project, either as a user or as a developer, 
+please [write me.]("mailto:revuskyNOSPAM@gmail.com")
