@@ -19,7 +19,7 @@
 <target name="build" depends="init">
     <freecc src="FEL.freecc"/>
     <freecc src="FTL.freecc"/>
-    <javac classpath="." debug="on" source="1.5" target="1.5" srcdir="."/>
+    <javac classpath="." debug="on" srcdir="."/>
 </target>
 
 <target name="test" depends="build">

@@ -19,7 +19,7 @@
  
 <target name="compile" depends="init, parser-gen">
      <javac srcdir="javagrammar"
-      classpath="." debug="on" optimize="off" source="1.5" target="1.5"/>
+      classpath="." debug="on" optimize="off" />
 </target>
 
 <target name="test" depends="compile">
