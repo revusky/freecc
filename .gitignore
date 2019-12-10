@@ -4,6 +4,7 @@
 /src/java/org/visigoths/freecc/parser/*
 /examples/freemarker/ftl/*
 /examples/freemarker/fel/*
+/examples/java/javagrammar/*
 
 # Compiled class file
 *.class
