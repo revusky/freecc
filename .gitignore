@@ -1,5 +1,6 @@
 /docs/*
 /build/*
+/test.tmp/*
 /freecc.jar
 /src/java/org/visigoths/freecc/parser/*
 /examples/freemarker/ftl/*
