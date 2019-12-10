@@ -2,6 +2,8 @@
 /build/*
 /freecc.jar
 /src/java/org/visigoths/freecc/parser/*
+/examples/freemarker/ftl/*
+/examples/freemarker/fel/*
 
 # Compiled class file
 *.class
