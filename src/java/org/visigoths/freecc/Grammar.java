@@ -62,24 +62,24 @@ public class Grammar {
     private int lookaheadLimit;
     private boolean considerSemanticLA;
     private List<MatchInfo> sizeLimitedMatches;
-    private List<String> nodeVariableNameStack = new ArrayList<String>();
+    private List<String> nodeVariableNameStack = new ArrayList<>();
     private ParserData parserData;
     private LexerData lexerData = new LexerData(this);
     private int includeNesting;
 
-    private List<TokenProduction> tokenProductions = new ArrayList<TokenProduction>();
-    private Map<String, ParserProduction> bnfProductions = new LinkedHashMap<String, ParserProduction>();
-    private Map<String, ParserProduction> productionTable = new HashMap<String, ParserProduction>();
-    private Map<String, RegularExpression> namedTokensTable = new LinkedHashMap<String, RegularExpression>();
-    private Map<String, String> tokenNamesToConstName = new HashMap<String,String>();
-    private List<FreeCCError> errors = new ArrayList<FreeCCError>();
-    private Map<Integer, RegularExpression> regexpLookup = new HashMap<Integer, RegularExpression>();
-    private Set<String> lexicalStates = new LinkedHashSet<String>();
-    private Map<Integer, String> tokenNames = new HashMap<Integer, String>();
-    private Set<String> nodeNames = new LinkedHashSet<String>();
-    private Map<String,String> nodeClassNames = new HashMap<String, String>();
-    private Map<String, String> nodePackageNames = new HashMap<String, String>();
-    private List<Node> codeInjections = new ArrayList<Node>();
+    private List<TokenProduction> tokenProductions = new ArrayList<>();
+    private Map<String, ParserProduction> bnfProductions = new LinkedHashMap<>();
+    private Map<String, ParserProduction> productionTable = new HashMap<>();
+    private Map<String, RegularExpression> namedTokensTable = new LinkedHashMap<>();
+    private Map<String, String> tokenNamesToConstName = new HashMap<>();
+    private List<FreeCCError> errors = new ArrayList<>();
+    private Map<Integer, RegularExpression> regexpLookup = new HashMap<>();
+    private Set<String> lexicalStates = new LinkedHashSet<>();
+    private Map<Integer, String> tokenNames = new HashMap<>();
+    private Set<String> nodeNames = new LinkedHashSet<>();
+    private Map<String,String> nodeClassNames = new HashMap<>();
+    private Map<String, String> nodePackageNames = new HashMap<>();
+    private List<Node> codeInjections = new ArrayList<>();
     private boolean usesCommonTokenAction, usesTokenHook, usesCloseNodeScopeHook, usesOpenNodeScopeHook, usesjjtreeOpenNodeScope, usesjjtreeCloseNodeScope;
     
     public Grammar(FreeCCOptions options) {

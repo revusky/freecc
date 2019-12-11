@@ -54,17 +54,17 @@ public class LexicalState {
     int dummyStateIndex = -1;
     boolean done;
     boolean mark[];
-    Vector<NfaState> allStates = new Vector<NfaState>();
-    List<NfaState> indexedAllStates = new ArrayList<NfaState>();
-    Map<String, NfaState> equivStatesTable = new HashMap<String, NfaState>();
-    Map<String, int[]> allNextStates = new Hashtable<String, int[]>();
-    private Hashtable<String, int[]> compositeStateTable = new Hashtable<String, int[]>();
-    private Map<String, String> stateBlockTable = new Hashtable<String, String>();
-    private Hashtable<String, Integer> stateIndexFromComposite = new Hashtable<String, Integer>();
-    private Hashtable<String, int[]> stateSetsToFix = new Hashtable<String, int[]>();
-    private List<TokenProduction> tokenProductions = new ArrayList<TokenProduction>();
+    Vector<NfaState> allStates = new Vector<>();
+    List<NfaState> indexedAllStates = new ArrayList<>();
+    Map<String, NfaState> equivStatesTable = new HashMap<>();
+    Map<String, int[]> allNextStates = new Hashtable<>();
+    private Hashtable<String, int[]> compositeStateTable = new Hashtable<>();
+    private Map<String, String> stateBlockTable = new Hashtable<>();
+    private Hashtable<String, Integer> stateIndexFromComposite = new Hashtable<>();
+    private Hashtable<String, int[]> stateSetsToFix = new Hashtable<>();
+    private List<TokenProduction> tokenProductions = new ArrayList<>();
     private NfaState initialState;
-    private Map<String, Map<String, RegularExpression>> tokenTable = new HashMap<String, Map<String, RegularExpression>>();
+    private Map<String, Map<String, RegularExpression>> tokenTable = new HashMap<>();
 
     private NfaState singlesToSkip;
     private boolean mixed;
@@ -73,10 +73,10 @@ public class LexicalState {
     RegularExpression matchAnyChar;
     int initMatch;
     RegularExpression currentRegexp;
-    private HashSet<RegularExpression> regularExpressions = new HashSet<RegularExpression>();
+    private HashSet<RegularExpression> regularExpressions = new HashSet<>();
 
     private int maxStrKind, maxLen;
-    private List<Map<String, KindInfo>> charPosKind = new ArrayList<Map<String, KindInfo>>();
+    private List<Map<String, KindInfo>> charPosKind = new ArrayList<>();
 
     // with single char keys;
     private int[] maxLenForActive = new int[100]; // 6400 tokens
@@ -1001,8 +1001,8 @@ public class LexicalState {
 
     public List<List<NfaState>> partitionStatesSetForAscii(NfaState[] states, int byteNum) {
         int[] cardinalities = new int[states.length];
-        Vector<NfaState> original = new Vector<NfaState>();
-        Vector<List<NfaState>> partition = new Vector<List<NfaState>>();
+        Vector<NfaState> original = new Vector<>();
+        Vector<List<NfaState>> partition = new Vector<>();
         NfaState tmp;
 
         original.setSize(states.length);
