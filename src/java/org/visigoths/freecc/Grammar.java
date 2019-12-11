@@ -86,6 +86,10 @@ public class Grammar {
         this.options = options;
         options.setGrammar(this);
     }
+
+    public String[] getLexicalStates() {
+	return lexicalStates.toArray(new String[]{});
+    }
     
     void parse(String location) throws IOException, ParseException {
         Reader input = new FileReader(location);

@@ -878,7 +878,7 @@ TokenProduction TokenProduction() #TokenProduction :
 }
 {
   [
-    LOOKAHEAD(2) "<" "*" ">"
+    LOOKAHEAD(2) "<" "*" ">" 
     |
     "<"
       <IDENTIFIER>{grammar.addLexicalState(current_token.image);}
@@ -930,18 +930,14 @@ INJECT(TokenProduction) :
     }
 
     /**
-     * The states in which this regular expression production exists. If this
-     * array is null, then "<*>" has been specified and this regular expression
-     * exists in all states. However, this null value is replaced by a String
-     * array that includes all lexical state names during the semanticization
-     * phase.
+     * The states in which this regular expression production exists.
      */
     public String[] getLexStates() {
         if (!explicit) {
             return new String[] {getGrammar().getDefaultLexicalState()};
         }
         if (isInAllLexStates()) {
-            return null;
+	    return getGrammar().getLexicalStates();
         }
         Set<String> states = new LinkedHashSet<String>();
         for (Node n : children) {
