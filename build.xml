@@ -42,6 +42,7 @@
  	       debug="on"
  	       optimize="off"
     	   classpath="${compile.class.path}"
+           includeantruntime="yes"
     />
     <copy todir="build/org/visigoths/freecc/output/java">
       <fileset dir="src/templates/java">

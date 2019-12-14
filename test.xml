@@ -245,9 +245,7 @@
 
 	    <freecc src="examples/MailProcessing/Digest.freecc" BASE_SRC_DIR="test.tmp/MailProcessing"  />
 	    <freecc src="examples/MailProcessing/Faq.freecc" BASE_SRC_DIR="test.tmp/MailProcessing" />
- 	    <javac srcdir="test.tmp/MailProcessing"/>
-
-
+ 	    <javac srcdir="test.tmp/MailProcessing" includeantruntime="no"/>
 	    <echo />
 	  </target>
 </project>
