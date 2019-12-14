@@ -600,6 +600,16 @@ public class Grammar {
         if (node instanceof Token) {
             return;
         } 
+	else if (node instanceof TokenManagerDecls) {
+	    ClassOrInterfaceBody body = Nodes.childrenOfType(node, ClassOrInterfaceBody.class).get(0);
+	    checkForHooks(body, getLexerClassName());
+	}
+        else if (node instanceof ParserCodeDecls) {
+	    List<CompilationUnit> cus = Nodes.childrenOfType(node, CompilationUnit.class);
+	    if (!cus.isEmpty()) {
+		checkForHooks(cus.get(0), getParserClassName());
+	    }
+	}
         else if (node instanceof CodeInjection) {
             CodeInjection ci = (CodeInjection) node;
             if (ci.name.equals(getLexerClassName())) {
