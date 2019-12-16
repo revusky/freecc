@@ -141,6 +141,10 @@ public class ParserData {
         for (int i = 0; i < choices.size(); i++) {
             nestedSeq = (ExpansionSequence) (choices.get(i));
             visitExpansion(nestedSeq);
+	    if (nestedSeq.getUnits().isEmpty()) {
+		// TODO: REVISIT
+		break;
+	    }
             Lookahead l = (Lookahead) nestedSeq.getUnits().get(0);
             if (!l.getAlwaysSucceeds()) {
                 lookaheads.add(l);

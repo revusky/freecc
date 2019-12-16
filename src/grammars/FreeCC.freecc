@@ -1118,6 +1118,7 @@ Expansion ExpansionSequence() :
      if (la.getNestedExpansion()==null) {
         la.setExpansion(CURRENT_NODE);
      }
+     CURRENT_NODE.setLookahead(la);
      return CURRENT_NODE;
   }
 }
@@ -1140,9 +1141,9 @@ INJECT(ExpansionSequence) :
        return Nodes.childrenOfType(this, Expansion.class);
    }
    
-   public Lookahead getLookahead() {
-       return (Lookahead) getChild(0);
-   }
+//   public Lookahead getLookahead() {
+//       return (Lookahead) getChild(0);
+//   }
 }
 
 
@@ -1229,7 +1230,7 @@ Expansion expansion_unit() #dummy :
     NonTerminal nt;
     Action act;
     Token t=current_token, name;
-    Lookahead la;
+    Lookahead la=null;
     Expansion result=null;
     TreeBuildingAnnotation tba = null;
 }
@@ -1310,6 +1311,7 @@ Expansion expansion_unit() #dummy :
  ]
  {
         result.setTreeNodeBehavior(tba);
+	result.setLookahead(la);
         return result;
  }
 }
@@ -1380,15 +1382,16 @@ INJECT(ZeroOrOne) :
      extends Expansion;
 }
 {
-    private Lookahead lookahead; 
     
     public Lookahead getLookahead() {
-        Expansion exp = getNestedExpansion();        
+        Expansion exp = getNestedExpansion();
+	Lookahead lookahead = super.getLookahead();
         if (lookahead == null) {
             if (exp instanceof ExpansionSequence) {
                 lookahead = ((ExpansionSequence) exp).getLookahead();
             } else {
-                lookahead = new Lookahead(exp);
+	        lookahead = new Lookahead(exp);
+                setLookahead(lookahead);
             }
         }
         return lookahead;
@@ -1411,21 +1414,22 @@ INJECT(ZeroOrMore) :
      extends Expansion;
 }
 {
-    private Lookahead lookahead;
-    private String label; 
-    
+    private String label;
+
     public Lookahead getLookahead() {
-        Expansion exp = getNestedExpansion();        
+        Expansion exp = getNestedExpansion();
+	Lookahead lookahead = super.getLookahead();
         if (lookahead == null) {
             if (exp instanceof ExpansionSequence) {
                 lookahead = ((ExpansionSequence) exp).getLookahead();
             } else {
-                lookahead = new Lookahead(exp);
+	        lookahead = new Lookahead(exp);
+                setLookahead(lookahead);
             }
         }
         return lookahead;
     }
-    
+
     public Expansion getNestedExpansion() {
         return Nodes.firstChildOfType(this, Expansion.class);
     }
@@ -1450,21 +1454,22 @@ INJECT(OneOrMore) :
      extends Expansion;
 }
 {
-    private Lookahead lookahead;
-    private String label; 
-    
+    private String label;
+
     public Lookahead getLookahead() {
-        Expansion exp = getNestedExpansion();        
+        Expansion exp = getNestedExpansion();
+	Lookahead lookahead = super.getLookahead();
         if (lookahead == null) {
             if (exp instanceof ExpansionSequence) {
                 lookahead = ((ExpansionSequence) exp).getLookahead();
             } else {
-                lookahead = new Lookahead(exp);
+	        lookahead = new Lookahead(exp);
+                setLookahead(lookahead);
             }
         }
         return lookahead;
     }
-    
+
     public Expansion getNestedExpansion() {
         return Nodes.firstChildOfType(this, Expansion.class);
     }

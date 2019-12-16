@@ -48,6 +48,8 @@ abstract public class Expansion extends BaseNode {
 
     private TreeBuildingAnnotation treeNodeBehavior;
 
+    private Lookahead lookahead;
+
     public Expansion(Grammar grammar) {
         super(-1);
         setGrammar(grammar);
@@ -132,9 +134,9 @@ abstract public class Expansion extends BaseNode {
         return (this instanceof RegularExpression);
     }
 
-    public Lookahead getLookahead() {
-        return null;
-    }
+    //    public Lookahead getLookahead() {
+    //        return null;
+    //    }
 
     public Object getParentObject() {
         return parentObject != null ? parentObject : getParent();
@@ -160,6 +162,18 @@ abstract public class Expansion extends BaseNode {
                 getGrammar().addNodeType(treeNodeBehavior.getNodeName());
             }
         }
+    }
+
+    public void setLookahead(Lookahead lookahead) {
+	this.lookahead = lookahead;
+    }
+
+    public Lookahead getLookahead() {
+	//	if (lookahead != null) {
+	//  return lookahead;
+        //}
+	//return (Lookahead) getChild(0);
+	return lookahead;
     }
     
 }

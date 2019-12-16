@@ -222,6 +222,11 @@ public class LookaheadCalc {
             return false;
         }
         ExpansionSequence seq = (ExpansionSequence) exp;
+	List<Expansion> es = seq.getUnits();
+	if (es.isEmpty()) {
+	    //REVISIT: Look at this case carefully!
+	    return false;
+	}
         Expansion e = seq.getUnits().get(0);
         if (!(e instanceof Lookahead)) {
             return false;
