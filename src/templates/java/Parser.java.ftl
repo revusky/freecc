@@ -146,6 +146,11 @@ public class ${grammar.parserClassName} implements ${grammar.constantsClassName}
   }
 
   [#else]
+
+  public ${grammar.parserClassName}(java.io.InputStream stream) {
+      this(new java.io.InputStreamReader(stream));
+  }
+
   public ${grammar.parserClassName}(java.io.Reader stream) {
      [#if grammar.options.javaUnicodeEscape]
     jj_input_stream = new JavaCharStream(stream, 1, 1);
