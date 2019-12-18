@@ -768,7 +768,11 @@ INJECT(TypeDeclaration) :
             ListIterator<Node> iterator = iterator();
             while (iterator.hasNext()) {
                 Node node = iterator.next();
-                if (node instanceof ImplementsList || node instanceof ClassOrInterfaceBody) {
+                if (node instanceof ImplementsList) {
+		   iterator.previous();
+                   break;
+                }
+                if (node instanceof ClassOrInterfaceBody) {
                     break;
                 }
             }
