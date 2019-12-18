@@ -37,7 +37,7 @@ import org.visigoths.freecc.parser.ParseException;
  */
 public final class Main {
     
-    public static final String PROG_NAME = "FreeCC 0.9.3";
+    public static final String PROG_NAME = "FreeCC 0.9.4pre";
     
     private Main() {
     }
@@ -76,15 +76,14 @@ public final class Main {
         System.out.println("    USER_DEFINED_LEXER     (default false)");
         System.out.println("    USER_CHAR_STREAM       (default false)");
         System.out.println("    BUILD_PARSER           (default true)");
-        System.out.println("    BUILD_TOKEN_MANAGER    (default true)");
-        System.out.println("    TOKEN_MANAGER_USES_PARSER (default false)");
+        System.out.println("    BUILD_LEXER            (default true)");
+        System.out.println("    LEXER_USES_PARSER      (default false)");
         System.out.println("    SANITY_CHECK           (default true)");
-        System.out.println("    TREE_BUILDING_ENABLED  (default false)");
+        System.out.println("    TREE_BUILDING_ENABLED  (default true)");
         System.out.println("    TREE_BUILDING_DEFAULT  (default true)");
-        System.out.println("    TOKENS_ARE_NODES       (default false)");
+        System.out.println("    TOKENS_ARE_NODES       (default true)");
         System.out.println("    SPECIAL_TOKENS_ARE_NODES (default false)");
-        System.out.println("    TREE_BUILDING_DEFAULT  (default true)");
-        System.out.println("    MULTI                  (default false)");
+        System.out.println("    MULTI                  (default true)");
         System.out.println("    NODES_USE_PARSER       (default false)");
         System.out.println("    NODE_FACTORY           (default false)");
         System.out.println("    SMART_NODE_CREATION    (default false)");
@@ -105,7 +104,7 @@ public final class Main {
         System.out.println("    JDK_VERSION            (default 1.5)");
         System.out.println("");
         System.out.println("EXAMPLE:");
-        System.out.println("    freecc -IGNORE_CASE=true -LOOKAHEAD:2 -debug_parser mygrammar.jj");
+        System.out.println("    freecc -IGNORE_CASE=true -LOOKAHEAD:2 -debug_parser MyGrammar.freecc");
         System.out.println("");
     }
 
