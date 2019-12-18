@@ -86,7 +86,7 @@ public final class Main {
         System.out.println("    MULTI                  (default true)");
         System.out.println("    NODES_USE_PARSER       (default false)");
         System.out.println("    NODE_FACTORY           (default false)");
-        System.out.println("    SMART_NODE_CREATION    (default false)");
+        System.out.println("    SMART_NODE_CREATION    (default true)");
         System.out.println("    FREEMARKER_NODES       (default false)");
         System.out.println("    BEAUTIFY_OUTPUT        (default true)");
         System.out.println("");
@@ -101,7 +101,6 @@ public final class Main {
         System.out.println("    NODE_CLASS             (default BaseNode)");
         System.out.println("    NODE_PREFIX            (default empty string)");
         System.out.println("    TOKEN_FACTORY          (default not defined)");
-        System.out.println("    JDK_VERSION            (default 1.5)");
         System.out.println("");
         System.out.println("EXAMPLE:");
         System.out.println("    freecc -IGNORE_CASE=true -LOOKAHEAD:2 -debug_parser MyGrammar.freecc");
