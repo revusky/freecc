@@ -7,7 +7,7 @@
 	    <delete dir="test.tmp" />
 	    <mkdir dir="test.tmp" />
  	    <freecc src="examples/CORBA-IDL/IDL.freecc" BASE_SRC_DIR="test.tmp/CORBA-IDL" />
-	    <javac srcdir="test.tmp/CORBA-IDL" />
+	    <javac srcdir="test.tmp/CORBA-IDL" includeantruntime="no" />
 	    <copy todir="test.tmp/CORBA-IDL/">
 	      <fileset dir="examples/CORBA-IDL">
 	        <include name="*.idl" />
@@ -37,7 +37,7 @@
 	    </copy>
 
 	    <freecc src="examples/GUIParsing/ParserVersion/CalcInput.freecc" BASE_SRC_DIR="test.tmp/GUIParsing/ParserVersion"/> 
-	    <javac srcdir="test.tmp/GUIParsing/ParserVersion" />
+	    <javac srcdir="test.tmp/GUIParsing/ParserVersion" includeantruntime="no" />
 
 	    <echo />
 	    
@@ -48,7 +48,7 @@
 	    </copy>
 
 	    <freecc src="examples/GUIParsing/LexerVersion/CalcInput.freecc" BASE_SRC_DIR="test.tmp/GUIParsing/LexerVersion" />
-	    <javac srcdir="test.tmp/GUIParsing/LexerVersion" />
+	    <javac srcdir="test.tmp/GUIParsing/LexerVersion" includeantruntime="no" />
 
 	    <echo />
 	    
@@ -65,7 +65,7 @@
 	      </fileset>
 	    </copy>
  	
- 	    <javac srcdir="test.tmp/Interpreter" debug="on"/>
+ 	    <javac srcdir="test.tmp/Interpreter" debug="on" includeantruntime="no" />
 
 	    <java failonerror="true" fork="true" 
 	          classname="SPLParser" 
@@ -123,7 +123,7 @@
 	    <echo />
 	    
 	    <freecc src="examples/TreeBuildingExamples/eg1.freecc" BASE_SRC_DIR="test.tmp/TreeBuildingExamples.eg1" />
-	    <javac debug="on" srcdir="test.tmp/TreeBuildingExamples.eg1" />
+	    <javac debug="on" srcdir="test.tmp/TreeBuildingExamples.eg1" includeantruntime="no" />
 	    
 	    <java failonerror="true" fork="true" 
 	          classname="Eg1" 
@@ -152,7 +152,7 @@
 	    </copy>
 
 	    <freecc src="examples/TreeBuildingExamples/eg2.freecc" BASE_SRC_DIR="test.tmp/TreeBuildingExamples.eg2"/> 
-	    <javac srcdir="test.tmp/TreeBuildingExamples.eg2" includes="Eg2.java" />
+	    <javac srcdir="test.tmp/TreeBuildingExamples.eg2" includes="Eg2.java" includeantruntime="no" />
 	    
 	    <java failonerror="true" fork="true" 
 	          classname="Eg2" 
@@ -181,7 +181,7 @@
 	    </copy>
 
 	    <freecc src="examples/TreeBuildingExamples/eg3.freecc" BASE_SRC_DIR="test.tmp/TreeBuildingExamples.eg3" />
-	    <javac srcdir="test.tmp/TreeBuildingExamples.eg3" />
+	    <javac srcdir="test.tmp/TreeBuildingExamples.eg3" includeantruntime="no" />
 
 	    <java failonerror="true" fork="true" 
 	          classname="Eg3" 
@@ -210,7 +210,7 @@
 	    </copy>
 
 	    <freecc src="examples/TreeBuildingExamples/eg4.freecc" BASE_SRC_DIR="test.tmp/TreeBuildingExamples.eg4"/> 
-	    <javac srcdir="test.tmp/TreeBuildingExamples.eg4" debug="true" />
+	    <javac srcdir="test.tmp/TreeBuildingExamples.eg4" debug="true" includeantruntime="no" />
 
 	    <java failonerror="true" fork="true" 
 	          classname="Eg4" 
