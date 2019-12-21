@@ -151,8 +151,8 @@ public class ${grammar.lexerClassName} implements ${grammar.constantsClassName} 
     private final int[] jjstateSet = new int[${2*lexerData.stateSetSize}];
 
 [#if lexerData.hasActions()]
-    private final StringBuffer jjimage = new StringBuffer();
-    private StringBuffer image = jjimage;
+    private final StringBuilder jjimage = new StringBuilder();
+    private StringBuilder image = jjimage;
     private int jjimageLen;
 [/#if]
 
