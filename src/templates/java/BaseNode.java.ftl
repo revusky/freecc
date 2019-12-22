@@ -60,16 +60,6 @@ public class ${grammar.baseNodeClassName} implements Node {
         }
     }
     
-    [#if grammar.options.multi]
-//    public final int id;
-    [#else]
-    protected int id;
-    [/#if]
-/*    
-    public int getId() {
-        return id;
-    }
-*/    
     protected Node parent;
     protected java.util.List<Node> children = newList();
     

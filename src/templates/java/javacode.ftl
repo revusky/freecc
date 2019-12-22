@@ -166,17 +166,13 @@
    [#if treeNodeBehavior??]
       [#set nodeName = NODE_PREFIX + treeNodeBehavior.nodeName]
    [/#if]
-   [#var constName = nodeName?substring(NODE_PREFIX?length)?upper_case]
-   [#var nodeType = nodeName]
-   [#if !grammar.options.multi]
-       [#set nodeType = grammar.baseNodeClassName]
-   [/#if]
-   ${nodeType} ${nodeVarName} = null;
+   [#-- var constName = nodeName?substring(NODE_PREFIX?length)?upper_case --]
+         ${nodeName} ${nodeVarName} = null;
    if (buildTree) {
    [#if NODE_USES_PARSER]
-        ${nodeVarName} = new ${nodeType}(this);
+        ${nodeVarName} = new ${nodeName}(this);
    [#else]
-       ${nodeVarName} = new ${nodeType}();
+       ${nodeVarName} = new ${nodeName}();
    [/#if]
 
        Token jjtStartToken = getToken(1);

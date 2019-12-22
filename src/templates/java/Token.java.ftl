@@ -124,7 +124,7 @@ public class Token implements Node, ${grammar.constantsClassName} {
 
 
     public static Token newToken(int ofKind, String image) {
-       [#if grammar.options.treeBuildingEnabled && grammar.options.multi]
+       [#if grammar.options.treeBuildingEnabled]
            [#var packagePrefix = ""]
            [#if grammar.nodePackage?has_content][#set packagePrefix=grammar.nodePackage+"."][/#if]
            switch(ofKind) {

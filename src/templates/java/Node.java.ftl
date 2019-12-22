@@ -118,9 +118,6 @@ public interface Node
      
      void setEndColumn(int endColumn);
      
-//     int getId(); // Do we need this? 
-
-     
 [#if grammar.options.visitor]
    [#var RETURN_TYPE = grammar.options.visitorReturnType]
    [#if !RETURN_TYPE?has_content][#set RETURN_TYPE = "void"][/#if]
