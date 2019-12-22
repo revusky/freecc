@@ -283,23 +283,22 @@ public class FilesGenerator {
         if (grammar.getOptions().getVisitor()) {
             files.add(getOutputFile(grammar.getParserClassName() + "Visitor"));
         }
-        if (grammar.getOptions().getMulti()) {
-            for (RegularExpression re : grammar.getOrderedNamedTokens()) {
-                if (re.isPrivate()) continue;
-                File outputFile = getOutputFile(re.getGeneratedClassName());
-                files.add(outputFile);
-                tokenSubclassFileNames.add(outputFile.getName());
+
+        for (RegularExpression re : grammar.getOrderedNamedTokens()) {
+            if (re.isPrivate()) continue;
+            File outputFile = getOutputFile(re.getGeneratedClassName());
+            files.add(outputFile);
+            tokenSubclassFileNames.add(outputFile.getName());
+        }
+        for (String nodeName : grammar.getNodeNames()) {
+            File outputFile = getOutputFile(nodeName);
+            if (tokenSubclassFileNames.contains(outputFile.getName())) {
+                String name = outputFile.getName();
+                name = name.substring(0, name.length() -5);
+                grammar.addSemanticError(null, "The name " + name + " is already used as a Token subclass.");
             }
-            for (String nodeName : grammar.getNodeNames()) {
-                File outputFile = getOutputFile(nodeName);
-                if (tokenSubclassFileNames.contains(outputFile.getName())) {
-                    String name = outputFile.getName();
-                    name = name.substring(0, name.length() -5);
-                    grammar.addSemanticError(null, "The name " + name + " is already used as a Token subclass.");
-                }
-                files.add(outputFile);
-            }
-        } 
+            files.add(outputFile);
+        }
         for (File file : files) {
             if (regenerate(file)) {
                 generate(file);

@@ -159,7 +159,6 @@ public class FreeCCOptions {
         optionValues.put("CACHE_TOKENS", false);
         optionValues.put("CSS", "");
 
-        optionValues.put("MULTI", true);
         optionValues.put("NODE_DEFAULT_VOID", false);
         optionValues.put("SMART_NODE_CREATION", true);
         optionValues.put("NODE_USES_PARSER", false);
@@ -243,11 +242,17 @@ public class FreeCCOptions {
             grammar.addWarning(node, "In FreeCC, the STATIC option is superfluous. All parsers are non-static. Option setting will be ignored.");
             return;
         }
-	else if (s.equalsIgnoreCase("NODE_FACTORY")) {
+	    else if (s.equalsIgnoreCase("NODE_FACTORY")) {
             Node node = (nameloc instanceof Node) ? (Node) nameloc : null;
             grammar.addWarning(node, "In FreeCC, the NODE_FACTORY option from JJTree has been removed. Option setting will be ignored.");
             return;
         }
+	    else if (s.equalsIgnoreCase("MULTI")) {
+            Node node = (nameloc instanceof Node) ? (Node) nameloc : null;
+            grammar.addWarning(node, "In FreeCC, the MULTI option from JJTree has been removed. Effectively, it is always true. Option setting will be ignored.");
+            return;
+        }
+
         else if (s.equalsIgnoreCase("KEEP_LINE_COLUMN")) {
             Node node = (nameloc instanceof Node) ? (Node) nameloc : null;
             grammar.addWarning(node, "In FreeCC, the KEEP_LINE_COLUMN option is superfluous. Location info is always retained. Option setting will be ignored.");
@@ -625,15 +630,6 @@ public class FreeCCOptions {
 
 
     /**
-     * Find the multi value.
-     *
-     * @return The requested multi value.
-     */
-    public boolean getMulti() {
-        return booleanValue("MULTI");
-    }
-
-    /**
      * Find the node default void value.
      *
      * @return The requested node default void value.
@@ -646,15 +642,6 @@ public class FreeCCOptions {
         return booleanValue("SMART_NODE_CREATION");
     }
 
-
-    /**
-     * Find the node factory value.
-     *
-     * @return The requested node factory value.
-     */
-    public boolean getNodeFactory() {
-        return booleanValue("NODE_FACTORY");
-    }
 
     /**
      * Find the node uses parser value.
