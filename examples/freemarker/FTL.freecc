@@ -55,7 +55,6 @@ options
    TREE_BUILDING_ENABLED=true;
    SMART_NODE_CREATION=true;
    TOKENS_ARE_NODES=true;
-   MULTI=true;
    BASE_SRC_DIR=".";
    PARSER_PACKAGE="ftl";
    NODE_PACKAGE="ftl.ast";

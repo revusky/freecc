@@ -29,7 +29,6 @@
 
 options {
   TREE_BUILDING_ENABLED=true;
-  MULTI=true;
   TOKENS_ARE_NODES=true;
   PARSER_CLASS="Eg2";
 }

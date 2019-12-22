@@ -28,7 +28,6 @@
 
 
 options {
-  MULTI=true;
   NODE_DEFAULT_VOID=true;
   TREE_BUILDING_ENABLED=true;
   PARSER_CLASS="Eg3";

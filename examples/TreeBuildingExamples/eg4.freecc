@@ -28,7 +28,6 @@
 
 
 options {
-  MULTI=true;
   VISITOR=true;
   NODE_DEFAULT_VOID=true;
   TREE_BUILDING_ENABLED=true;
