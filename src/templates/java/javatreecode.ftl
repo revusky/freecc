@@ -216,15 +216,7 @@
     public void setBuildTree(boolean buildTree) {
         this.buildTree = buildTree;
     }
-    
-    private boolean isSpecialToken(Node n) {
-        if (n instanceof Token) {
-	        Token t = (Token) n;
-	        return t.next != null && t.next.specialToken == t;
-        }
-        return false;
-    }
-    
+
     /**
      * @deprecated
      * Kludge so that existing jjtree-based code that uses
