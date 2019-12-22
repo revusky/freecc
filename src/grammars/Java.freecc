@@ -28,13 +28,17 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+/*
+ This Java Grammar is INCLUDEd in the FreeCC.freecc grammar, but should be useful on its own.
+*/
+
+
 options {
   JAVA_UNICODE_ESCAPE;
   TREE_BUILDING_ENABLED;
   TOKENS_ARE_NODES;
   SPECIAL_TOKENS_ARE_NODES;
   SMART_NODE_CREATION;
-  MULTI;
   BASE_SRC_DIR = "../../examples/java";
 //  BASE_SRC_DIR = "."; // I use this for testing sometimes.
   NODE_PACKAGE = "javagrammar.nodes";
@@ -356,9 +360,7 @@ INJECT(BaseNode) :
     implements Node, CONSTANTS_CLASS;
 }
 {    
-//    public int getId() {
-//        return id;
-//    }
+
     
     protected String getLiteralText() {
         StringBuilder buf = new StringBuilder();
@@ -788,9 +790,6 @@ INJECT(TypeDeclaration) :
                     break;
                 }
             }
-//            iterator.previous();
-//            iterator.add(Token.newToken(WHITESPACE, " "));
-//            iterator.next();
             iterator.add(extendsList);
         }
         extendsList.addType(type, getInterface());
@@ -1551,7 +1550,9 @@ void ShiftExpression():
    )*
 }
 
-void ShiftOperator() :
+//Egad, what a ghastly kludge this is! Consider a REVISIT.
+
+void ShiftOperator() #void :
 {
    Token first, second, third=null;
 }
@@ -1561,9 +1562,13 @@ void ShiftOperator() :
    [third=">"]
    {
       Token result = null;
-      if (second.getBeginColumn() != first.getBeginColumn() + 1) throw new ParseException("Shift operator cannot have spaces or comments inside!");
+      if (second.getBeginColumn() != first.getBeginColumn() + 1) {
+            throw new ParseException("Shift operator cannot have spaces or comments inside!\n" + getInputSource() + ":line " + first.beginLine + ":column " + first.beginColumn);
+      }
       if (third!=null) {
-         if (third.getBeginColumn() != first.getBeginColumn() + 2) throw new ParseException("Shift operator >>> cannot have spaces or comments inside!");
+         if (third.getBeginColumn() != first.getBeginColumn() + 2) {
+              throw new ParseException("Shift operator >>> cannot have spaces or comments inside!\n" + getInputSource() + ":line " + first.beginLine +":column " +first.beginColumn);
+         }
 	 first.image = ">>>";
 	 first.kind = RUNSIGNEDSHIFT;
 	 first.next = third.next;
