@@ -63,8 +63,8 @@ public class Lookahead extends Expansion {
         super(grammar);
     }
     
-    protected Lookahead(int id) {
-        super(id);
+    protected Lookahead() {
+	//        super(id);
     }
     
     boolean[] getFirstSet() {

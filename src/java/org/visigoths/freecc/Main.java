@@ -85,7 +85,7 @@ public final class Main {
         System.out.println("    SPECIAL_TOKENS_ARE_NODES (default false)");
         System.out.println("    MULTI                  (default true)");
         System.out.println("    NODES_USE_PARSER       (default false)");
-        System.out.println("    NODE_FACTORY           (default false)");
+	//        System.out.println("    NODE_FACTORY           (default false)"); // Getting rid of this.
         System.out.println("    SMART_NODE_CREATION    (default true)");
         System.out.println("    FREEMARKER_NODES       (default false)");
         System.out.println("    BEAUTIFY_OUTPUT        (default true)");

@@ -35,7 +35,6 @@
 [#var tokenMaskIndex=0]
 [#var nodeNumbering = 0]
 [#var jj3_expansion]
-[#var NODE_FACTORY = grammar.options.nodeFactory]
 [#var NODE_USES_PARSER = grammar.options.nodeUsesParser]
 [#var NODE_PREFIX = grammar.options.nodePrefix]
 [#var currentProduction]
@@ -174,19 +173,12 @@
    [/#if]
    ${nodeType} ${nodeVarName} = null;
    if (buildTree) {
-   [#if NODE_FACTORY]
-       [#if NODE_USES_PARSER]
-           ${nodeVarName} = (${nodeType}) ${grammar.baseNodeClassName}.jjtCreate(this, ${constName});
-       [#else]
-           ${nodeVarName} = (${nodeType}) ${grammar.baseNodeClassName}.jjtCreate(${constName});
-       [/#if]
+   [#if NODE_USES_PARSER]
+        ${nodeVarName} = new ${nodeType}(this);
    [#else]
-       [#if NODE_USES_PARSER]
-           ${nodeVarName} = new ${nodeType}(this[#if !grammar.options.multi], ${constName}[/#if]);
-       [#else]
-           ${nodeVarName} = new ${nodeType}([#if !grammar.options.multi]${constName}[/#if]);
-       [/#if]
+       ${nodeVarName} = new ${nodeType}();
    [/#if]
+
        Token jjtStartToken = getToken(1);
        ${nodeVarName}.setBeginLine(jjtStartToken.beginLine);
        ${nodeVarName}.setBeginColumn(jjtStartToken.beginColumn);

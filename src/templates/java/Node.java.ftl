@@ -118,7 +118,7 @@ public interface Node
      
      void setEndColumn(int endColumn);
      
-     int getId();
+//     int getId(); // Do we need this? 
 
      
 [#if grammar.options.visitor]

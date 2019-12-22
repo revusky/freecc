@@ -53,14 +53,6 @@ public class ${classname} extends ${grammar.baseNodeClassName} {
     public ${classname}(${grammar.parserClassName} p) {
         super(p, ${grammar.constantsClassName}.${classname?upper_case});
     }
-[#else]
-    public ${classname}(int id) {
-        super(id);
-    }
-
-    public ${classname}() {
-        super(${grammar.constantsClassName}.${classname?upper_case});
-    }
 
 [/#if]
 

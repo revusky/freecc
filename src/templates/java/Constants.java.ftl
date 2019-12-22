@@ -14,11 +14,11 @@ public interface ${grammar.constantsClassName} {
   int ${regexp.label} = ${regexp.ordinal};
   [/#list]
   
-[#if grammar.options.treeBuildingEnabled]
+[#-- if grammar.options.treeBuildingEnabled]
   [#list grammar.nodeIds as id]
      int ${id} = ${1+id_index+grammar.orderedNamedTokens?size};
   [/#list]
-[/#if]
+[/#if --]
   
 [#if !grammar.options.userDefinedLexer&&grammar.options.buildLexer]    
   /**

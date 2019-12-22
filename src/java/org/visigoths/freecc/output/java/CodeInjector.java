@@ -274,16 +274,16 @@ class CodeInjector {
             TypeParameterList injectedTypeParameters = typeParameterLists.get(fullName);
             if (injectedTypeParameters != null) {
                 TypeParameterList typeParameters = typedecl.getTypeParameterList();
-                if (typeParameters == null) {
+		/*                if (typeParameters == null) {
                     ListIterator<Node> iterator = typedecl.iterator();
                     Node n = null;
                     while (n.getId() != FreeCCConstants.IDENTIFIER) {
                         n = iterator.next();
                     }
                     iterator.add(typeParameters);
-                } else {
-                    typeParameters.add(injectedTypeParameters);
-                }
+		    } else {*/
+                 typeParameters.add(injectedTypeParameters);
+		    //                }
             }
             List<ClassOrInterfaceBodyDeclaration> injectedCode = bodyDeclarations.get(fullName);
             if (injectedCode != null) {

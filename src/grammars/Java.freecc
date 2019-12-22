@@ -356,9 +356,9 @@ INJECT(BaseNode) :
     implements Node, CONSTANTS_CLASS;
 }
 {    
-    public int getId() {
-        return id;
-    }
+//    public int getId() {
+//        return id;
+//    }
     
     protected String getLiteralText() {
         StringBuilder buf = new StringBuilder();
@@ -500,9 +500,12 @@ INJECT(ImportDeclaration) : {}
     
     public boolean isStaticImport() {
         for (Node n : children) {
-            if (n.getId() == STATIC) {
-                return true;
-            }
+	    if (n instanceof Token) {
+	       Token t = (Token) n;
+	       if (t.getId() == STATIC) {
+	           return true;
+	       }
+	    }
         }
         return false;
     }
@@ -641,8 +644,11 @@ INJECT(TypeDeclaration) :
 {
     public String getName() {
         for (Node n : children) {
-            if (n.getId() == IDENTIFIER) {
-                return n.toString();
+	    if (n instanceof Token) {
+	        Token t = (Token) n;
+                if (t.getId() == IDENTIFIER) {
+                   return t.toString();
+	        }
             }
         }
         throw new RuntimeException("Should never get here.");
@@ -650,9 +656,12 @@ INJECT(TypeDeclaration) :
     
     public boolean getInterface() {
        for (Node n : children) {
-           if (n.getId() == INTERFACE) {
-               return true;
-           }
+           if (n instanceof Token) {
+	       Token t = (Token) n;
+	       if (t.getId() == INTERFACE) {
+	          return true;
+	       }
+	   }
        }
        return false;
     } 
@@ -678,7 +687,7 @@ INJECT(TypeDeclaration) :
     public TypeParameterList getTypeParameterList() {
         ListIterator<Node> iterator = iterator();
         Node n = iterator.next();
-        while (n.getId() != IDENTIFIER) {
+        while (!(n instanceof Identifier)) {
             n = iterator.next();
         }
         n = iterator.next();
@@ -738,9 +747,12 @@ INJECT(TypeDeclaration) :
     
     public boolean isClass() {
         for (Node n : children) {
-            if (n.getId() == CLASS) {
-                return true;
-            }
+	    if (n instanceof Token) {
+	       Token t = (Token) n;
+	       if (t.getId() == CLASS) {
+                 return true;
+               }
+	    }
         }
         return false;
     }
@@ -995,9 +1007,12 @@ INJECT(ClassOrInterfaceBody) :
         Node n = null;
         while (iterator.hasNext()) {
             n = iterator.next();
-            if (n.getId() == LBRACE) {
-                break;
-            }
+	    if (n instanceof Token) {
+	       Token t = (Token) n;
+	       if (t.getId()==LBRACE) {
+	          break;
+	       }
+	    }
         }
         for (ClassOrInterfaceBodyDeclaration elem : elements) {
             iterator.add(elem);
@@ -1115,7 +1130,7 @@ INJECT(MethodDeclaration) : {}
 {
     public String getName() {
         for (Node n : children) {
-            if (n.getId() == IDENTIFIER) {
+            if (n instanceof Identifier) {
                 return n.toString();
             }
         }

@@ -846,9 +846,12 @@ INJECT(TreeBuildingAnnotation) :
     public String getNodeName() {
         String image = null;
         for (Node n : children) {
-           if (n.getId() == FreeCCConstants.HASH_ID) {
-               image = n.toString().substring(1);
-           }
+	   if (n instanceof Token) {
+	       Token t = (Token) n;
+               if (t.getId() == FreeCCConstants.HASH_ID) {
+                   image = t.toString().substring(1);
+               }
+	   }
         }
         return image;
     }
@@ -859,9 +862,12 @@ INJECT(TreeBuildingAnnotation) :
     
     public boolean getGtNode() {
         for (Node n : children) {
-           if (n.getId() == FreeCCConstants.GT) {
-               return true;
-           }
+	   if (n instanceof Token) {
+	      Token t = (Token) n;
+              if (t.getId() == FreeCCConstants.GT) {
+                  return true;
+              }
+	   }
         }
         return false;
     }
@@ -918,9 +924,12 @@ INJECT(TokenProduction) :
 
     public boolean getIgnoreCase() {
         for (Node n : children) {
-           if (n.getId() == FreeCCConstants._IGNORE_CASE) {
-               return true;
-           }
+	   if (n instanceof Token) {
+	      Token t = (Token) n;
+               if (t.getId() == FreeCCConstants._IGNORE_CASE) {
+                   return true;
+               }
+	   }
         }
         return false;
     }
@@ -941,9 +950,12 @@ INJECT(TokenProduction) :
         }
         Set<String> states = new LinkedHashSet<String>();
         for (Node n : children) {
-           if (n.getId() == FreeCCConstants.IDENTIFIER) {
-              states.add(n.toString());
-           }
+	   if (n instanceof Token) {
+	       Token t = (Token) n;
+               if (t.getId() == FreeCCConstants.IDENTIFIER) {
+                  states.add(n.toString());
+               }
+	   }
         }
         if (states.isEmpty()) {
            return new String[] {getGrammar().getDefaultLexicalState()};
@@ -958,9 +970,12 @@ INJECT(TokenProduction) :
     
     private boolean isInAllLexStates() {
        for (Node n : children) {
-          if (n.getId() == FreeCCConstants.STAR) {
-              return true;
-          }
+          if (n instanceof Token) {
+	      Token t = (Token) n;
+              if (t.getId() == FreeCCConstants.STAR) {
+                  return true;
+              }
+	  }
        }
        return false;
     }
@@ -1133,9 +1148,11 @@ INJECT(ExpansionSequence) :
 }
 {
    public ExpansionSequence(Grammar grammar) {
-       this();
+//       this();
        setGrammar(grammar);
    }
+
+   public ExpansionSequence() {}
    
    public List<Expansion> getUnits() {
        return Nodes.childrenOfType(this, Expansion.class);
@@ -1244,7 +1261,7 @@ Expansion expansion_unit() #dummy :
       // Create a singleton choice with an empty action.
       ExpansionChoice ch = new ExpansionChoice();
       ch.setGrammar(grammar);
-      ExpansionSequence seq = new ExpansionSequence();
+      ExpansionSequence seq = new ExpansionSequence(grammar);
       seq.setGrammar(grammar);
       seq.addChild(la);
       la.ordinal = 0;
@@ -1354,9 +1371,12 @@ INJECT(NonTerminal) :
     
     public String getName() {
         for (Node n : children) {
-            if (n.getId() == FreeCCConstants.IDENTIFIER) {
-                return n.toString();
-            }
+	    if (n instanceof Token) {
+	        Token t = (Token) n;
+                if (t.getId() == FreeCCConstants.IDENTIFIER) {
+                    return n.toString();
+                }
+	    }
         }
         return null;
     }
@@ -1778,7 +1798,11 @@ INJECT(RepetitionRange) :
     private int max = -1;
     public boolean hasMax() {
         for (Node n : children) {
-           if (n.getId() == FreeCCConstants.COMMA) return true;
+	   if (n instanceof Token) {
+	       Token t = (Token) n;
+               if (t.getId() == FreeCCConstants.COMMA) return true;	       
+	   }
+
         }
         return false;
     }
@@ -1886,9 +1910,12 @@ INJECT(CharacterList) :
 
     public boolean isNegated() {
         for (Node n : children) {
-            if (n.getId() == FreeCCConstants.TILDE) {
-               return true;
-            }
+	    if (n instanceof Token) {
+	       Token t = (Token) n;
+               if (t.getId() == FreeCCConstants.TILDE) {
+                  return true;
+               }
+	    }
         }
         return false;
     }

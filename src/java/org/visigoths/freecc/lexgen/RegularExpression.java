@@ -67,8 +67,7 @@ public abstract class RegularExpression extends Expansion {
         super(grammar);
     }
     
-    public RegularExpression(int id) {
-        super(id);
+    public RegularExpression() {
     }
     
     private int type;

@@ -238,10 +238,14 @@ public class FreeCCOptions {
 
         String s = name.toUpperCase();
 
-
         if (s.equalsIgnoreCase("STATIC")) {
             Node node = (nameloc instanceof Node) ? (Node) nameloc : null;
             grammar.addWarning(node, "In FreeCC, the STATIC option is superfluous. All parsers are non-static. Option setting will be ignored.");
+            return;
+        }
+	else if (s.equalsIgnoreCase("NODE_FACTORY")) {
+            Node node = (nameloc instanceof Node) ? (Node) nameloc : null;
+            grammar.addWarning(node, "In FreeCC, the NODE_FACTORY option from JJTree has been removed. Option setting will be ignored.");
             return;
         }
         else if (s.equalsIgnoreCase("KEEP_LINE_COLUMN")) {
@@ -270,12 +274,12 @@ public class FreeCCOptions {
             grammar.addWarning(node, "The JJTree option TRACK_TOKENS is ignored because it is basically obsolete in FreeCC.");
             return;
         }
-        
         else if (s.equalsIgnoreCase("NODE_EXTENDS")) {
             Node node = (nameloc instanceof Node) ? (Node) nameloc : null;
             grammar.addWarning(node, "The NODE_EXTENDS option is obsolete. You can simply use code injection instead.");
             return;
         }
+
         else if (!optionValues.containsKey(s) && !aliases.containsKey(s)) {
             Node node = (nameloc instanceof Node) ? (Node) nameloc : null;
             grammar.addWarning(node, "Bad option name \"" + name

@@ -61,44 +61,33 @@ public class ${grammar.baseNodeClassName} implements Node {
     }
     
     [#if grammar.options.multi]
-    public final int id;
+//    public final int id;
     [#else]
     protected int id;
     [/#if]
-    
+/*    
     public int getId() {
         return id;
     }
-    
+*/    
     protected Node parent;
     protected java.util.List<Node> children = newList();
     
     private int beginLine, beginColumn, endLine, endColumn;
     private String inputSource;
     private java.util.Map<String,Object> attributes;
-[#var parserArg = ""]    
 [#if grammar.options.nodeUsesParser]    
     protected ${grammar.parserClassName} parser;
-    [#set parserArg = grammar.parserClassName + " parser, "] 
+    public ${grammar.baseNodeClassName}(${grammar.parserClassName} parser) {
+        this.parser = parser;
+    }
+
+    public ${grammar.baseNodeClassName}() {
+    }
+
 [/#if]
 
-    public ${grammar.baseNodeClassName}(${parserArg}int id) {
-        this.id = id;
-[#if grammar.options.nodeUsesParser]
-        this.parser = parser;
-[/#if]        
-    }
     
-    
-[#if grammar.options.nodeFactory]
-    static public ${grammar.baseNodeClassName} jjtCreate(${parserArg}int id) {
-  [#if grammar.options.nodeUsesParser]
-        return new ${grammar.baseNodeClassName}(parser, id); 
-  [#else]
-        return new ${grammar.baseNodeClassName}(id);
-  [/#if]    
-    }
-[/#if]
 [#if grammar.options.visitor]
     [#var VISITOR_THROWS = ""]
     [#if grammar.options.visitorException?has_content]
@@ -277,7 +266,8 @@ public class ${grammar.baseNodeClassName} implements Node {
     }
     
     public String getNodeName() {
-        return ${grammar.constantsClassName}.nodeNames[id];
+//        return ${grammar.constantsClassName}.nodeNames[id];
+         return this.getClass().getSimpleName();
     }
     
     public String getNodeType() {
