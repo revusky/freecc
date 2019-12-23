@@ -1,5 +1,5 @@
 #!/bin/sh
-DIR=$(dirname $(realpath $0))
+DIR=$(dirname $0)
 BOOTSTRAP_FREECC_JAR=$DIR/freecc.jar
 FREECC_JAR=$DIR/../freecc.jar
 FREEMARKER_JAR=$DIR/freemarker.jar
