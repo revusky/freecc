@@ -152,6 +152,7 @@ public class FreeCCOptions {
         optionValues.put("PARSER_CLASS", "");
         optionValues.put("LEXER_CLASS", "");
         optionValues.put("CONSTANTS_CLASS", "");
+	optionValues.put("BASE_SRC_DIR", ".");
         optionValues.put("BASE_NODE_CLASS", "BaseNode");
 
         optionValues.put("OUTPUT_DIRECTORY", "");
@@ -176,7 +177,6 @@ public class FreeCCOptions {
         optionValues.put("TOKENS_ARE_NODES", true);
         optionValues.put("SPECIAL_TOKENS_ARE_NODES", false);
         optionValues.put("FREEMARKER_NODES", false);
-        optionValues.put("BASE_SRC_DIR", "");
         optionValues.put("DEFAULT_LEXICAL_STATE", "DEFAULT");
         aliases.put("DEBUG_TOKEN_MANAGER", "DEBUG_LEXER");
         aliases.put("USER_TOKEN_MANAGER", "USER_DEFINED_LEXER");
