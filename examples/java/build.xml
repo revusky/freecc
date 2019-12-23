@@ -13,7 +13,7 @@
 </target>
 
 <target name="parser-gen" depends="init" unless="javaparser.uptodate">
-    <freecc src="../../src/grammars/Java.freecc"/>
+    <freecc src="../../src/grammars/Java.freecc" BASE_SRC_DIR="../../examples/java" />
 </target>
  
  
