@@ -30,12 +30,7 @@
 
 options {
   JAVA_UNICODE_ESCAPE;
-  TREE_BUILDING_ENABLED;
-  TOKENS_ARE_NODES;
   SPECIAL_TOKENS_ARE_NODES;
-  SMART_NODE_CREATION; // This is the default currently.
-  BASE_SRC_DIR = "../../examples/java";
-//  BASE_SRC_DIR = "."; // I use this for testing sometimes.
   NODE_PACKAGE = "javagrammar.nodes";
   PARSER_PACKAGE=javagrammar;
 }
@@ -218,6 +213,7 @@ TOKEN :
 | < TRANSIENT: "transient" > #KeyWord
 | < TRUE: "true" > #Literal
 | < TRY: "try" > #KeyWord
+// | < VAR: "var" > #KeyWord // Currently unused. TODO.
 | < VOID: "void" > #KeyWord
 | < VOLATILE: "volatile" > #KeyWord
 | < WHILE: "while" > #KeyWord
