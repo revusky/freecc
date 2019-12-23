@@ -71,7 +71,7 @@ public final class Main {
         System.out.println("    DEBUG_LEXER            (default false)");
         System.out.println("    ERROR_REPORTING        (default true)");
         System.out.println("    JAVA_UNICODE_ESCAPE    (default false)");
-        System.out.println("    UNICODE_INPUT          (default true)");
+	//        System.out.println("    UNICODE_INPUT          (default true)"); //Obsolete.
         System.out.println("    IGNORE_CASE            (default false)");
         System.out.println("    USER_DEFINED_LEXER     (default false)");
         System.out.println("    USER_CHAR_STREAM       (default false)");
