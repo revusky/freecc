@@ -28,17 +28,12 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
- This Java Grammar is INCLUDEd in the FreeCC.freecc grammar, but should be useful on its own.
-*/
-
-
 options {
   JAVA_UNICODE_ESCAPE;
   TREE_BUILDING_ENABLED;
   TOKENS_ARE_NODES;
   SPECIAL_TOKENS_ARE_NODES;
-  SMART_NODE_CREATION;
+  SMART_NODE_CREATION; // This is the default currently.
   BASE_SRC_DIR = "../../examples/java";
 //  BASE_SRC_DIR = "."; // I use this for testing sometimes.
   NODE_PACKAGE = "javagrammar.nodes";
@@ -344,7 +339,8 @@ TOKEN :
 | < REMASSIGN: "%=" > #Operator 
 | < LSHIFTASSIGN: "<<=" > #Operator 
 | < RSIGNEDSHIFTASSIGN: ">>=" > #Operator 
-| < RUNSIGNEDSHIFTASSIGN: ">>>=" > #Operator 
+| < RUNSIGNEDSHIFTASSIGN: ">>>=" > #Operator
+| < LAMBDA : "->" > #Operator
 }
 
 <PHONY> TOKEN:
@@ -360,7 +356,6 @@ INJECT(BaseNode) :
     implements Node, CONSTANTS_CLASS;
 }
 {    
-
     
     protected String getLiteralText() {
         StringBuilder buf = new StringBuilder();
@@ -502,12 +497,9 @@ INJECT(ImportDeclaration) : {}
     
     public boolean isStaticImport() {
         for (Node n : children) {
-	    if (n instanceof Token) {
-	       Token t = (Token) n;
-	       if (t.getId() == STATIC) {
-	           return true;
-	       }
-	    }
+            if ((n instanceof KeyWord) && n.toString().equals("static")) {
+                return true;
+            }
         }
         return false;
     }
@@ -646,11 +638,8 @@ INJECT(TypeDeclaration) :
 {
     public String getName() {
         for (Node n : children) {
-	    if (n instanceof Token) {
-	        Token t = (Token) n;
-                if (t.getId() == IDENTIFIER) {
-                   return t.toString();
-	        }
+            if (n instanceof Identifier) {
+                return n.toString();
             }
         }
         throw new RuntimeException("Should never get here.");
@@ -659,10 +648,10 @@ INJECT(TypeDeclaration) :
     public boolean getInterface() {
        for (Node n : children) {
            if (n instanceof Token) {
-	       Token t = (Token) n;
-	       if (t.getId() == INTERFACE) {
-	          return true;
-	       }
+	      Token t = (Token) n;
+              if (t.getId() == INTERFACE) {
+                  return true;
+              }
 	   }
        }
        return false;
@@ -689,7 +678,7 @@ INJECT(TypeDeclaration) :
     public TypeParameterList getTypeParameterList() {
         ListIterator<Node> iterator = iterator();
         Node n = iterator.next();
-        while (!(n instanceof Identifier)) {
+        while (n instanceof Identifier) {
             n = iterator.next();
         }
         n = iterator.next();
@@ -751,8 +740,8 @@ INJECT(TypeDeclaration) :
         for (Node n : children) {
 	    if (n instanceof Token) {
 	       Token t = (Token) n;
-	       if (t.getId() == CLASS) {
-                 return true;
+               if (t.getId() == CLASS) {
+                  return true;
                }
 	    }
         }
@@ -782,14 +771,13 @@ INJECT(TypeDeclaration) :
             ListIterator<Node> iterator = iterator();
             while (iterator.hasNext()) {
                 Node node = iterator.next();
-                if (node instanceof ImplementsList) {
-		   iterator.previous();
-                   break;
-                }
-                if (node instanceof ClassOrInterfaceBody) {
+                if (node instanceof ImplementsList || node instanceof ClassOrInterfaceBody) {
                     break;
                 }
             }
+//            iterator.previous();
+//            iterator.add(Token.newToken(WHITESPACE, " "));
+//            iterator.next();
             iterator.add(extendsList);
         }
         extendsList.addType(type, getInterface());
@@ -1008,9 +996,9 @@ INJECT(ClassOrInterfaceBody) :
             n = iterator.next();
 	    if (n instanceof Token) {
 	       Token t = (Token) n;
-	       if (t.getId()==LBRACE) {
-	          break;
-	       }
+               if (t.getId() == LBRACE) {
+                   break;
+               }
 	    }
         }
         for (ClassOrInterfaceBodyDeclaration elem : elements) {
@@ -1418,7 +1406,11 @@ INJECT(ThrowsList) :
 Expression Expression() #Expression(>1) :
 {}
 {
-  AssignmentExpression()
+  (
+     LOOKAHEAD(LambdaExpression()) LambdaExpression()
+     |
+     AssignmentExpression()
+  )
   {return (Expression) peekNode();}
 }
 
@@ -1443,6 +1435,7 @@ INJECT(UnaryExpressionNotPlusMinus) : {extends Expression}{}
 INJECT(PostfixExpression) : {extends Expression}{}
 INJECT(CastExpression) : {extends Expression}{}
 INJECT(PrimaryExpression) : {extends Expression} {}
+INJECT(LambdaExpression) : {extends Expression} {}
 
 /*
  * This expansion has been written this way instead of:
@@ -1582,7 +1575,6 @@ void ShiftOperator() #void :
       }
    }
 }
-
 
 
 void AdditiveExpression():
@@ -2246,6 +2238,56 @@ void DefaultValue():
 {
   "default" MemberValue()
 }
+
+LambdaExpression LambdaExpression() :
+{}
+{
+  LambdaLHS()
+  "->"
+  LambdaRHS()
+  {
+     return CURRENT_NODE;
+  }
+}
+
+void LambdaLHS() : {}
+{
+   LOOKAHEAD(SimpleLambdaLHS() "->")
+   SimpleLambdaLHS()
+   |
+   LOOKAHEAD(FormalLambdaLHS() "->")
+   FormalLambdaLHS()
+}
+
+void SimpleLambdaLHS() #void : {}
+{
+   <IDENTIFIER>
+   |
+   (
+     "("
+     [<IDENTIFIER>(","<IDENTIFIER>)*]
+     ")"
+   )
+}
+
+void FormalLambdaLHS() #FormalParameters : {}
+{
+   "("
+       Type() VariableDeclaratorId()
+       (
+         "," Type() VariableDeclaratorId()
+       )*
+   ")"
+}
+
+void LambdaRHS() :
+{}
+{
+  Expression()
+  |
+  Block()
+}
+
 
 
 /* IDENTIFIERS */
