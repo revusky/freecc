@@ -281,8 +281,6 @@ TOKEN :
   > #Literal
 }
 
-/* SEPARATORS */
-
 TOKEN :
 {
   < LPAREN: "(" > #Delimiter
@@ -294,14 +292,7 @@ TOKEN :
 | < SEMICOLON: ";" > #Delimiter
 | < COMMA: "," > #Delimiter
 | < DOT: "." > #Delimiter
-| < DOUBLE_COLON: "::" > #Delimiter
-}
-
-/* OPERATORS */
-
-TOKEN :
-{
-  < ASSIGN: "=" > #Operator 
+| < ASSIGN: "=" > #Operator 
 | < GT: ">" > #Operator 
 | < LT: "<" > #Operator 
 | < BANG: "!" > #Operator 
@@ -337,6 +328,8 @@ TOKEN :
 | < RSIGNEDSHIFTASSIGN: ">>=" > #Operator 
 | < RUNSIGNEDSHIFTASSIGN: ">>>=" > #Operator
 | < LAMBDA : "->" > #Operator
+| < DOUBLE_COLON: "::" > #Delimiter
+| < VAR_ARGS: "..." > #Delimiter
 }
 
 <PHONY> TOKEN:
@@ -1702,7 +1695,7 @@ void PrimarySuffix():
     |
     "." <IDENTIFIER>
     |
-    "::" <IDENTIFIER>
+    "::" (<IDENTIFIER>|"new")
     |
     Arguments()
 }
