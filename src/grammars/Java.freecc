@@ -32,9 +32,6 @@ options {
   JAVA_UNICODE_ESCAPE;
   SPECIAL_TOKENS_ARE_NODES;
   PARSER_PACKAGE=javagrammar;
-//  SMART_NODE_CREATION=false;
-//  DEBUG_PARSER=true;
-//  DEBUG_LEXER=true;
 }
 
 INJECT(JavaParser) : 
@@ -1417,11 +1414,11 @@ INJECT(ThrowsList) :
 Expression Expression() #Expression(>1) :
 {}
 {
-  (
-     LOOKAHEAD(LambdaExpression()) LambdaExpression()
-     |
+//  (
+//     LOOKAHEAD(LambdaExpression()) LambdaExpression()
+//     |
      AssignmentExpression()
-  )
+//  )
   {return (Expression) peekNode();}
 }
 
@@ -1629,16 +1626,21 @@ void UnaryExpressionNotPlusMinus():
 {
   ( "~" | "!" ) UnaryExpression()
 |
-  LOOKAHEAD( CastLookahead() )
+//  LOOKAHEAD( CastLookahead() )
+//  LOOKAHEAD("(" Type() ")")
+  LOOKAHEAD(LambdaExpression())
+  LambdaExpression()
+  |
+  LOOKAHEAD(CastLookahead())
   CastExpression()
-|
+  |
   PostfixExpression()
 }
 
 // This production is to determine lookahead only.  The LOOKAHEAD specifications
 // below are not used, but they are there just to indicate that we know about
 // this.
-void CastLookahead():
+void CastLookahead() #void :
 {}
 {
   LOOKAHEAD(3)
@@ -1647,7 +1649,7 @@ void CastLookahead():
   LOOKAHEAD("(" Type() "[")
   "(" Type() "[" "]"
 |
-  "(" Type() ")" ( "~" | "!" | "(" | <IDENTIFIER> | "this" | "super" | "new" | Literal() )
+  "(" Type() ("&" Type())* ")" ( "~" | "!" | "(" | <IDENTIFIER> | "this" | "super" | "new" | Literal() )
 }
 
 void PostfixExpression():
@@ -1659,10 +1661,10 @@ void PostfixExpression():
 void CastExpression():
 {}
 {
-  LOOKAHEAD("(" PrimitiveType())
+  LOOKAHEAD("(" PrimitiveType() ")")
   "(" Type() ")" UnaryExpression()
-|
-  "(" Type() ")" UnaryExpressionNotPlusMinus()
+  |
+  "(" Type() ("&" Type())* ")" UnaryExpressionNotPlusMinus()
 }
 
 Expression PrimaryExpression() #PrimaryExpression :
@@ -1701,14 +1703,23 @@ void PrimaryPrefix():
   LOOKAHEAD( ReturnType() "." "class" )
   ReturnType() "." "class"
 |
+  LOOKAHEAD(MethodReference())
+  MethodReference()
+|  
   Name()
+}
+
+void MethodReference() :
+{}
+{
+    Type() "::" (<IDENTIFIER>|"new")
 }
 
 void PrimarySuffix():
 {}
 {
   LOOKAHEAD(2)
-   "." "this"
+   "." ("this"|"super")
     |
   LOOKAHEAD(2)
     "." AllocationExpression()
@@ -1716,7 +1727,7 @@ void PrimarySuffix():
   LOOKAHEAD(3)
     MemberSelector()
     |
-    "[" Expression() "]"
+    "[" [Expression()] "]"
     |
     "." <IDENTIFIER>
     |
@@ -1911,7 +1922,8 @@ void BlockStatement() #void :
   |
   Statement()
   |
-  ClassDeclaration()
+  LOOKAHEAD( Modifiers() "class")
+  Modifiers() ClassDeclaration()
   |
   InterfaceDeclaration()
 }
@@ -2209,6 +2221,8 @@ void MemberValue():
 void  MemberValueArrayInitializer():
 {}
 {
+  LOOKAHEAD(2) "{" "}"
+  |
   "{" MemberValue() ( LOOKAHEAD(2) "," MemberValue() )* [ "," ] "}"
 }
 
