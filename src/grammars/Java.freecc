@@ -31,7 +31,6 @@
 options {
   JAVA_UNICODE_ESCAPE;
   SPECIAL_TOKENS_ARE_NODES;
-  NODE_PACKAGE = "javagrammar.nodes";
   PARSER_PACKAGE=javagrammar;
 }
 
@@ -221,17 +220,27 @@ TOKEN :
 
 TOKEN :
 {
-  < INTEGER_LITERAL:
-        <DECIMAL_LITERAL> (["l","L"])?
-      | <HEX_LITERAL> (["l","L"])?
-      | <OCTAL_LITERAL> (["l","L"])?
+  < LONG_LITERAL:
+        <DECIMAL_LITERAL> (["l","L"])
+      | <HEX_LITERAL> (["l","L"])
+      | <OCTAL_LITERAL> (["l","L"])
+      | <BINARY_LITERAL> (["l","L"])
   > #Literal
 |
-  < #DECIMAL_LITERAL: ["1"-"9"] (["0"-"9"])* >
+  < INTEGER_LITERAL:
+        <DECIMAL_LITERAL>
+      | <HEX_LITERAL>
+      | <OCTAL_LITERAL>
+      | <BINARY_LITERAL>
+  > #Literal
 |
-  < #HEX_LITERAL: "0" ["x","X"] (["0"-"9","a"-"f","A"-"F"])+ >
+  < #DECIMAL_LITERAL: ["0"-"9"]((["0"-"9","_"])*["0"-"9"])? >
 |
-  < #OCTAL_LITERAL: "0" (["0"-"7"])* >
+  < #HEX_LITERAL: "0" ["x","X"] <HEX_DIGITS> >
+|
+  < #OCTAL_LITERAL: "0" ["0"-"7"]((["0"-"7","_"])*["0"-"7"])? >
+|
+  < #BINARY_LITERAL: "0" ["b","B"] ["0","1"]((["0","1","_"])*["0","1"])? >
 |
   < FLOATING_POINT_LITERAL:
         <DECIMAL_FLOATING_POINT_LITERAL>
@@ -239,20 +248,22 @@ TOKEN :
   > #Literal
 |
   < #DECIMAL_FLOATING_POINT_LITERAL:
-        (["0"-"9"])+ "." (["0"-"9"])* (<DECIMAL_EXPONENT>)? (["f","F","d","D"])?
-      | "." (["0"-"9"])+ (<DECIMAL_EXPONENT>)? (["f","F","d","D"])?
-      | (["0"-"9"])+ <DECIMAL_EXPONENT> (["f","F","d","D"])?
-      | (["0"-"9"])+ (<DECIMAL_EXPONENT>)? ["f","F","d","D"]
+        <DECIMAL_LITERAL> "." (<DECIMAL_LITERAL>)? (<DECIMAL_EXPONENT>)? (["f","F","d","D"])?
+      | "." <DECIMAL_LITERAL> (<DECIMAL_EXPONENT>)? (["f","F","d","D"])?
+      | <DECIMAL_LITERAL> <DECIMAL_EXPONENT> (["f","F","d","D"])?
+      | <DECIMAL_LITERAL> (<DECIMAL_EXPONENT>)? ["f","F","d","D"]
   >
 |
-  < #DECIMAL_EXPONENT: ["e","E"] (["+","-"])? (["0"-"9"])+ >
+  < #DECIMAL_EXPONENT: ["e","E"] (["+","-"])? (<DECIMAL_LITERAL>)+ >
 |
   < #HEXADECIMAL_FLOATING_POINT_LITERAL:
-        "0" ["x", "X"] (["0"-"9","a"-"f","A"-"F"])+ (".")? <HEXADECIMAL_EXPONENT> (["f","F","d","D"])?
-      | "0" ["x", "X"] (["0"-"9","a"-"f","A"-"F"])* "." (["0"-"9","a"-"f","A"-"F"])+ <HEXADECIMAL_EXPONENT> (["f","F","d","D"])?
+        <HEX_LITERAL> (".")? <HEXADECIMAL_EXPONENT> (["f","F","d","D"])?
+      | "0" ["x","X"] (<HEX_DIGITS>)? "." <HEX_DIGITS> <HEXADECIMAL_EXPONENT> (["f","F","d","D"])?
   >
 |
-  < #HEXADECIMAL_EXPONENT: ["p","P"] (["+","-"])? (["0"-"9"])+ >
+  < #HEXADECIMAL_EXPONENT: ["p","P"] (["+","-"])? <DECIMAL_LITERAL> >
+|
+  < #HEX_DIGITS: ["0"-"9","a"-"f","A"-"F"]((["0"-"9","a"-"f","A"-"F","_"])*["0"-"9","a"-"f","A"-"F"])? >
 |
   < CHARACTER_LITERAL:
       "'"
@@ -330,6 +341,7 @@ TOKEN :
 | < LAMBDA : "->" > #Operator
 | < DOUBLE_COLON: "::" > #Delimiter
 | < VAR_ARGS: "..." > #Delimiter
+| < AT : "@"> #Delimiter
 }
 
 <PHONY> TOKEN:
@@ -394,7 +406,11 @@ CompilationUnit CompilationUnit() #CompilationUnit :
 {
   [ LOOKAHEAD( ( Annotation() )* "package" ) PackageDeclaration() ]
   ( ImportDeclaration() )*
-  ( TypeDeclaration() )+
+  (
+     ( TypeDeclaration() )+
+     |
+     <EOF>
+  )
   {
      return CURRENT_NODE;
   }
@@ -1705,6 +1721,8 @@ void Literal() #void :
 {
   <INTEGER_LITERAL>
 |
+  <LONG_LITERAL>
+|
   <FLOATING_POINT_LITERAL>
 |
   <CHARACTER_LITERAL>
@@ -1717,7 +1735,7 @@ void Literal() #void :
 |
   "null"
 }
-
+/*
 int IntegerLiteral() :
 {}
 {
@@ -1729,7 +1747,7 @@ int IntegerLiteral() :
             throw new Error();
           }
         }
-}
+}*/
 
 InvocationArgs Arguments() #InvocationArgs :
 {}

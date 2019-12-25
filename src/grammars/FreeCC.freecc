@@ -1788,6 +1788,19 @@ void RepeatedRegexp() #void :
   )?
 }
 
+int IntegerLiteral() :
+{}
+{
+  <INTEGER_LITERAL>
+        {
+          try {
+            return Integer.parseInt(current_token.toString());
+          } catch (NumberFormatException e) {
+            throw new Error();
+          }
+        }
+}
+
 INJECT(RepetitionRange) : 
 {
    import org.visigoths.freecc.lexgen.RegularExpression;
