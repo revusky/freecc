@@ -41,6 +41,8 @@
  	       deprecation="off"
  	       debug="on"
  	       optimize="off"
+               target="1.8"
+               source="1.8"
     	   classpath="${compile.class.path}"
            includeantruntime="yes"
     />
