@@ -218,8 +218,7 @@
     }
 
     /**
-     * @deprecated
-     * Kludge so that existing jjtree-based code that uses
+     * Just a kludge so that existing jjtree-based code that uses
      * parser.jjtree.foo can work without change.
      */
     

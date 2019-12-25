@@ -32,6 +32,9 @@ options {
   JAVA_UNICODE_ESCAPE;
   SPECIAL_TOKENS_ARE_NODES;
   PARSER_PACKAGE=javagrammar;
+//  SMART_NODE_CREATION=false;
+//  DEBUG_PARSER=true;
+//  DEBUG_LEXER=true;
 }
 
 INJECT(JavaParser) : 
@@ -896,7 +899,7 @@ INJECT(ImplementsList) :
     }
 }
 
-void EnumDeclaration() #void :
+void EnumDeclaration() :
 {}
 {
    "enum" <IDENTIFIER>
@@ -1048,6 +1051,8 @@ void ClassOrInterfaceBodyDeclaration(boolean isInterface) #ClassOrInterfaceBodyD
       ClassDeclaration()
       |
       InterfaceDeclaration()
+      |
+      AnnotationTypeDeclaration()
       |
       EnumDeclaration()
       |
@@ -1217,6 +1222,7 @@ void ExplicitConstructorInvocation():
 |
   [ LOOKAHEAD(2) PrimaryExpression() "." ] "super" Arguments() ";"
 }
+
 
 void Initializer():
 {}
@@ -1635,8 +1641,8 @@ void UnaryExpressionNotPlusMinus():
 void CastLookahead():
 {}
 {
-  LOOKAHEAD(2)
-  "(" PrimitiveType()
+  LOOKAHEAD(3)
+  "(" PrimitiveType() ")"
 |
   LOOKAHEAD("(" Type() "[")
   "(" Type() "[" "]"
@@ -1688,6 +1694,9 @@ void PrimaryPrefix():
   "(" Expression() ")"
 |
   AllocationExpression()
+|
+  LOOKAHEAD( PrimitiveType() "." "class" )
+  PrimitiveType() "." "class"
 |
   LOOKAHEAD( ReturnType() "." "class" )
   ReturnType() "." "class"
@@ -2206,7 +2215,7 @@ void  MemberValueArrayInitializer():
 
 /* Annotation Types. */
 
-void AnnotationTypeDeclaration() #void :
+void AnnotationTypeDeclaration() :
 {}
 {
   "@" "interface" <IDENTIFIER> AnnotationTypeBody()
