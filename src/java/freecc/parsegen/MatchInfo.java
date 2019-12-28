@@ -28,7 +28,7 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.visigoths.freecc.parsegen;
+package freecc.parsegen;
 
 /**
  * Describes a match, within a given lookahead.

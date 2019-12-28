@@ -8,7 +8,7 @@
 
 <target name="init">
    <uptodate property="javaparser.uptodate" srcfile="../../src/grammars/Java.freecc" targetfile="javagrammar/JavaParser.java"/>
-   <taskdef name="freecc" classname="org.visigoths.freecc.FreeCCAntTask" classpath="../../freecc.jar:../../bin/freecc.jar:../../bin/freemarker.jar"/>
+   <taskdef name="freecc" classname="freecc.FreeCCAntTask" classpath="../../freecc.jar:../../bin/freecc.jar:../../bin/freemarker.jar"/>
    <mkdir dir="javagrammar"/>
 </target>
 

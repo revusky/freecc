@@ -28,13 +28,13 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.visigoths.freecc.parsegen;
+package freecc.parsegen;
 
-import org.visigoths.freecc.Grammar;
-import org.visigoths.freecc.parser.BaseNode;
-import org.visigoths.freecc.lexgen.RegularExpression;
-import org.visigoths.freecc.parser.tree.TreeBuildingAnnotation;
-import org.visigoths.freecc.parser.tree.ParserProduction;
+import freecc.Grammar;
+import freecc.parser.BaseNode;
+import freecc.lexgen.RegularExpression;
+import freecc.parser.tree.TreeBuildingAnnotation;
+import freecc.parser.tree.ParserProduction;
 
 
 

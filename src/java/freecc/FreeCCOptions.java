@@ -28,11 +28,11 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.visigoths.freecc;
+package freecc;
 
 import java.io.IOException;
 import java.util.*;
-import org.visigoths.freecc.parser.Node;
+import freecc.parser.Node;
 
 
 public class FreeCCOptions {

@@ -9,7 +9,7 @@
 
 <target name="init">
      <taskdef name="freecc"
-              classname="org.visigoths.freecc.FreeCCAntTask"
+              classname="freecc.FreeCCAntTask"
               classpath="../../freecc.jar:../../bin/freecc.jar:../../bin/freemarker.jar"
      />
    <mkdir dir="fel"/>

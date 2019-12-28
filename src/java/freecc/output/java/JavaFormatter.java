@@ -27,12 +27,12 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.visigoths.freecc.output.java;
+package freecc.output.java;
 
 import java.io.*;
-import org.visigoths.freecc.parser.*;
-import org.visigoths.freecc.parser.tree.*;
-import static org.visigoths.freecc.parser.FreeCCConstants.*;
+import freecc.parser.*;
+import freecc.parser.tree.*;
+import static freecc.parser.FreeCCConstants.*;
 
 /**
  * A rather rough-and-ready class for pretty-printing java source code.

@@ -28,21 +28,21 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.visigoths.freecc.parsegen;
+package freecc.parsegen;
 
-import org.visigoths.freecc.parser.Nodes;
-import org.visigoths.freecc.parser.tree.ExpansionChoice;
-import org.visigoths.freecc.parser.tree.ExpansionSequence;
-import org.visigoths.freecc.parser.tree.RegexpChoice;
-import org.visigoths.freecc.parser.tree.RegexpSequence;
-import org.visigoths.freecc.parser.tree.RepetitionRange;
-import org.visigoths.freecc.parser.tree.ZeroOrMoreRegexp;
-import org.visigoths.freecc.parser.tree.ZeroOrOneRegexp;
-import org.visigoths.freecc.parser.tree.OneOrMoreRegexp;
-import org.visigoths.freecc.parser.tree.OneOrMore;
-import org.visigoths.freecc.parser.tree.ZeroOrMore;
-import org.visigoths.freecc.parser.tree.ZeroOrOne;
-import org.visigoths.freecc.parser.tree.TryBlock;
+import freecc.parser.Nodes;
+import freecc.parser.tree.ExpansionChoice;
+import freecc.parser.tree.ExpansionSequence;
+import freecc.parser.tree.RegexpChoice;
+import freecc.parser.tree.RegexpSequence;
+import freecc.parser.tree.RepetitionRange;
+import freecc.parser.tree.ZeroOrMoreRegexp;
+import freecc.parser.tree.ZeroOrOneRegexp;
+import freecc.parser.tree.OneOrMoreRegexp;
+import freecc.parser.tree.OneOrMore;
+import freecc.parser.tree.ZeroOrMore;
+import freecc.parser.tree.ZeroOrOne;
+import freecc.parser.tree.TryBlock;
 
 /**
  * A set of routines that walk down the Expansion tree in various ways.

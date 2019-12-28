@@ -28,9 +28,9 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.visigoths.freecc;
+package freecc;
 
-import org.visigoths.freecc.parser.Token;
+import freecc.parser.Token;
 
 /**
  * This package contains data created as a result of parsing and semanticizing a

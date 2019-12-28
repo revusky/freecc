@@ -28,12 +28,12 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.visigoths.freecc;
+package freecc;
 
 /**
  * Supply the version number.
  */
 public interface Version {
-   String version = "0.9.4pre";
+   String version = "0.9.4";
 }
 

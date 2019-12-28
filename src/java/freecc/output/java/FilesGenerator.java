@@ -28,20 +28,20 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.visigoths.freecc.output.java;
+package freecc.output.java;
 
 import java.io.*;
 import java.util.*;
-import org.visigoths.freecc.lexgen.RegularExpression;
+import freecc.lexgen.RegularExpression;
 
-import org.visigoths.freecc.*;
-import org.visigoths.freecc.parser.tree.CompilationUnit;
+import freecc.*;
+import freecc.parser.tree.CompilationUnit;
 
 import freemarker.template.*;
 import freemarker.cache.*;
 import freemarker.ext.beans.BeansWrapper;
 
-import org.visigoths.freecc.parser.*;
+import freecc.parser.*;
 
 public class FilesGenerator {
 

@@ -28,7 +28,7 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.visigoths.freecc.parsegen;
+package freecc.parsegen;
 
 /**
  * Objects of this type are passed to the tree walker routines in

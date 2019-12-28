@@ -17,4 +17,4 @@ esac
 # the bootstrap freecc.jar that is in the bin directory.
 
 CLASSPATH="$FREECC_JAR$PATH_SEP$BOOTSTRAP_FREECC_JAR$PATH_SEP$FREEMARKER_JAR"
-java -ea -classpath "$CLASSPATH" org.visigoths.freecc.Main "$@" 
+java -ea -classpath "$CLASSPATH" freecc.Main "$@" 

@@ -28,19 +28,19 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.visigoths.freecc.lexgen;
+package freecc.lexgen;
 
 import java.util.*;
 
-import org.visigoths.freecc.Grammar;
-import org.visigoths.freecc.parser.tree.Action;
-import org.visigoths.freecc.parser.tree.CharacterList;
-import org.visigoths.freecc.parser.tree.RegexpStringLiteral;
-import org.visigoths.freecc.parser.tree.RegexpChoice;
-import org.visigoths.freecc.parser.tree.RegexpSpec;
-import org.visigoths.freecc.parser.tree.TokenProduction;
+import freecc.Grammar;
+import freecc.parser.tree.Action;
+import freecc.parser.tree.CharacterList;
+import freecc.parser.tree.RegexpStringLiteral;
+import freecc.parser.tree.RegexpChoice;
+import freecc.parser.tree.RegexpSpec;
+import freecc.parser.tree.TokenProduction;
 
-import static org.visigoths.freecc.FreeCCUtils.*;
+import static freecc.FreeCCUtils.*;
 
 public class LexicalState {
 

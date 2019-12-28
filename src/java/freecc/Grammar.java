@@ -28,16 +28,16 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.visigoths.freecc;
+package freecc;
 
 import java.io.*;
 import java.util.*;
 
-import org.visigoths.freecc.lexgen.*;
-import org.visigoths.freecc.parsegen.*;
-import org.visigoths.freecc.parser.*;
-import org.visigoths.freecc.parser.tree.*;
-import org.visigoths.freecc.output.java.FilesGenerator;
+import freecc.lexgen.*;
+import freecc.parsegen.*;
+import freecc.parser.*;
+import freecc.parser.tree.*;
+import freecc.output.java.FilesGenerator;
 import freemarker.template.TemplateException;
 
 /**

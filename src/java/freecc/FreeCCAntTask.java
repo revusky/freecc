@@ -1,4 +1,4 @@
-package org.visigoths.freecc;
+package freecc;
 
 import java.io.File;
 import java.util.*;
@@ -145,7 +145,7 @@ public class FreeCCAntTask extends Task {
         args[i] = inputFile.getAbsolutePath();
         int result = 0;
         try {
-            result = org.visigoths.freecc.Main.mainProgram(args);
+            result = freecc.Main.mainProgram(args);
         } catch (Exception e) {
             e.printStackTrace();
             result=-1;

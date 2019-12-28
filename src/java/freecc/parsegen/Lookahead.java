@@ -28,22 +28,22 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.visigoths.freecc.parsegen;
+package freecc.parsegen;
 
 import java.util.*;
 
-import org.visigoths.freecc.Grammar;
-import org.visigoths.freecc.lexgen.RegularExpression;
-import org.visigoths.freecc.parser.Nodes;
-import org.visigoths.freecc.parser.tree.ExpansionChoice;
-import org.visigoths.freecc.parser.tree.ExpansionSequence;
-import org.visigoths.freecc.parser.tree.Expression;
-import org.visigoths.freecc.parser.tree.BNFProduction;
-import org.visigoths.freecc.parser.tree.OneOrMore;
-import org.visigoths.freecc.parser.tree.ZeroOrMore;
-import org.visigoths.freecc.parser.tree.ZeroOrOne;
-import org.visigoths.freecc.parser.tree.NonTerminal;
-import org.visigoths.freecc.parser.tree.TryBlock;
+import freecc.Grammar;
+import freecc.lexgen.RegularExpression;
+import freecc.parser.Nodes;
+import freecc.parser.tree.ExpansionChoice;
+import freecc.parser.tree.ExpansionSequence;
+import freecc.parser.tree.Expression;
+import freecc.parser.tree.BNFProduction;
+import freecc.parser.tree.OneOrMore;
+import freecc.parser.tree.ZeroOrMore;
+import freecc.parser.tree.ZeroOrOne;
+import freecc.parser.tree.NonTerminal;
+import freecc.parser.tree.TryBlock;
 
 
 

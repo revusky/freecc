@@ -28,27 +28,27 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.visigoths.freecc.lexgen;
+package freecc.lexgen;
 
 import java.util.*;
 
-import org.visigoths.freecc.Grammar;
-import org.visigoths.freecc.FreeCCUtils;
-import org.visigoths.freecc.parser.tree.Expression;
-import org.visigoths.freecc.parsegen.Expansion;
+import freecc.Grammar;
+import freecc.FreeCCUtils;
+import freecc.parser.tree.Expression;
+import freecc.parsegen.Expansion;
 
-import org.visigoths.freecc.parser.tree.Action;
-import org.visigoths.freecc.parser.tree.CharacterList;
-import org.visigoths.freecc.parser.tree.CharacterRange;
-import org.visigoths.freecc.parser.tree.EndOfFile;
-import org.visigoths.freecc.parser.tree.OneOrMoreRegexp;
-import org.visigoths.freecc.parser.tree.ZeroOrMoreRegexp;
-import org.visigoths.freecc.parser.tree.ZeroOrOneRegexp;
-import org.visigoths.freecc.parser.tree.RegexpRef;
-import org.visigoths.freecc.parser.tree.RegexpChoice;
-import org.visigoths.freecc.parser.tree.RegexpSequence;
-import org.visigoths.freecc.parser.tree.RegexpStringLiteral;
-import org.visigoths.freecc.parser.tree.TokenProduction;
+import freecc.parser.tree.Action;
+import freecc.parser.tree.CharacterList;
+import freecc.parser.tree.CharacterRange;
+import freecc.parser.tree.EndOfFile;
+import freecc.parser.tree.OneOrMoreRegexp;
+import freecc.parser.tree.ZeroOrMoreRegexp;
+import freecc.parser.tree.ZeroOrOneRegexp;
+import freecc.parser.tree.RegexpRef;
+import freecc.parser.tree.RegexpChoice;
+import freecc.parser.tree.RegexpSequence;
+import freecc.parser.tree.RegexpStringLiteral;
+import freecc.parser.tree.TokenProduction;
 
 /**
  * An abstract base class from which all the AST nodes that

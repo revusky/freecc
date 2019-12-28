@@ -28,7 +28,7 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.visigoths.freecc.lexgen;
+package freecc.lexgen;
 
 public final class KindInfo {
    long[] validKinds;

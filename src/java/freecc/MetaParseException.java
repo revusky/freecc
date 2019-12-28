@@ -28,9 +28,9 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.visigoths.freecc;
+package freecc;
 
-import org.visigoths.freecc.parser.ParseException;
+import freecc.parser.ParseException;
 
 /**
  * Thrown when there is a mis-configuration or a bug.

@@ -27,12 +27,12 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.visigoths.freecc.output.java;
+package freecc.output.java;
 
 import java.util.*;
 
-import org.visigoths.freecc.parser.*;
-import org.visigoths.freecc.parser.tree.*;
+import freecc.parser.*;
+import freecc.parser.tree.*;
 
 /**
  * Class to hold the code that comes from the grammar file

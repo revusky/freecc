@@ -3,7 +3,7 @@
   <property name="classpath" value="${basedir}/build:${basedir}/bin/freemarker.jar"/>
 
  <target name="all" description="run functional test cases">
-	<taskdef name="freecc" classname="org.visigoths.freecc.FreeCCAntTask" classpath="${classpath}"/>
+	<taskdef name="freecc" classname="freecc.FreeCCAntTask" classpath="${classpath}"/>
 	    <delete dir="test.tmp" />
 	    <mkdir dir="test.tmp" />
  	    <freecc src="examples/CORBA-IDL/IDL.freecc" BASE_SRC_DIR="test.tmp/CORBA-IDL" />

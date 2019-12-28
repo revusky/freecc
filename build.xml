@@ -11,14 +11,13 @@
 	<echo>JDK Version: ${java.version}</echo>
 	<echo>Operating System: ${os.name}</echo>
 	<uptodate property="parser.uptodate"
-                 targetfile="src/java/org/visigoths/freecc/parser/FreeCCParser.java">
+                 targetfile="src/java/freecc/parser/FreeCCParser.java">
 	 <srcfiles dir="src/grammars" includes="*.freecc"/>
 	</uptodate>
-	<taskdef name="freecc-bootstrap" classname="org.visigoths.freecc.FreeCCAntTask" classpath="${bootstrap.class.path}"/>
+	<taskdef name="freecc-bootstrap" classname="freecc.FreeCCAntTask" classpath="${bootstrap.class.path}"/>
 </target>
 
 <target name="parser-gen" depends="init" unless="parser.uptodate">
-        <!-- mkdir dir="src/java/org/visigoths/freecc/parser"/ -->
  	<freecc-bootstrap src="src/grammars/FreeCC.freecc"/>
 </target>
 
@@ -46,7 +45,7 @@
     	   classpath="${compile.class.path}"
            includeantruntime="yes"
     />
-    <copy todir="build/org/visigoths/freecc/output/java">
+    <copy todir="build/freecc/output/java">
       <fileset dir="src/templates/java">
          <include name="*.ftl"/>
       </fileset>
@@ -73,9 +72,9 @@
         <delete dir="examples/java/javagrammar"/>
         <delete dir="examples/freemarker/fel"/>
         <delete dir="examples/freemarker/ftl"/>
-        <delete dir="src/java/org/visigoths/freecc/parser"/>
+        <delete dir="src/java/freecc/parser"/>
     <!-- delete>
-      <fileset dir="src/java/org/visigoths/freecc/parser">
+      <fileset dir="src/java/freecc/parser">
          <include name="**/*.java"/>
       </fileset>
     </delete -->

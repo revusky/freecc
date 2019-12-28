@@ -28,38 +28,38 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.visigoths.freecc.parsegen;
+package freecc.parsegen;
 
 import java.util.*;
 
-import org.visigoths.freecc.Grammar;
-import org.visigoths.freecc.MetaParseException;
-import org.visigoths.freecc.lexgen.*;
-import org.visigoths.freecc.parser.FreeCCConstants;
-import org.visigoths.freecc.parser.Node;
-import org.visigoths.freecc.parser.Nodes;
-import org.visigoths.freecc.parser.Token;
-import org.visigoths.freecc.parser.tree.Action;
-import org.visigoths.freecc.parser.tree.BNFProduction;
-import org.visigoths.freecc.parser.tree.ExpansionChoice;
-import org.visigoths.freecc.parser.tree.ExpansionSequence;
-import org.visigoths.freecc.parser.tree.ParserProduction;
-import org.visigoths.freecc.parser.tree.EndOfFile;
-import org.visigoths.freecc.parser.tree.RepetitionRange;
-import org.visigoths.freecc.parser.tree.OneOrMore;
-import org.visigoths.freecc.parser.tree.ZeroOrMore;
-import org.visigoths.freecc.parser.tree.ZeroOrOne;
-import org.visigoths.freecc.parser.tree.NonTerminal;
-import org.visigoths.freecc.parser.tree.TryBlock;
-import org.visigoths.freecc.parser.tree.OneOrMoreRegexp;
-import org.visigoths.freecc.parser.tree.ZeroOrOneRegexp;
-import org.visigoths.freecc.parser.tree.ZeroOrMoreRegexp;
-import org.visigoths.freecc.parser.tree.RegexpChoice;
-import org.visigoths.freecc.parser.tree.RegexpRef;
-import org.visigoths.freecc.parser.tree.RegexpSequence;
-import org.visigoths.freecc.parser.tree.RegexpSpec;
-import org.visigoths.freecc.parser.tree.RegexpStringLiteral;
-import org.visigoths.freecc.parser.tree.TokenProduction;
+import freecc.Grammar;
+import freecc.MetaParseException;
+import freecc.lexgen.*;
+import freecc.parser.FreeCCConstants;
+import freecc.parser.Node;
+import freecc.parser.Nodes;
+import freecc.parser.Token;
+import freecc.parser.tree.Action;
+import freecc.parser.tree.BNFProduction;
+import freecc.parser.tree.ExpansionChoice;
+import freecc.parser.tree.ExpansionSequence;
+import freecc.parser.tree.ParserProduction;
+import freecc.parser.tree.EndOfFile;
+import freecc.parser.tree.RepetitionRange;
+import freecc.parser.tree.OneOrMore;
+import freecc.parser.tree.ZeroOrMore;
+import freecc.parser.tree.ZeroOrOne;
+import freecc.parser.tree.NonTerminal;
+import freecc.parser.tree.TryBlock;
+import freecc.parser.tree.OneOrMoreRegexp;
+import freecc.parser.tree.ZeroOrOneRegexp;
+import freecc.parser.tree.ZeroOrMoreRegexp;
+import freecc.parser.tree.RegexpChoice;
+import freecc.parser.tree.RegexpRef;
+import freecc.parser.tree.RegexpSequence;
+import freecc.parser.tree.RegexpSpec;
+import freecc.parser.tree.RegexpStringLiteral;
+import freecc.parser.tree.TokenProduction;
 
 public class Semanticizer {
 

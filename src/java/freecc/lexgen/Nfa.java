@@ -28,13 +28,13 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.visigoths.freecc.lexgen;
+package freecc.lexgen;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.visigoths.freecc.Grammar;
-import org.visigoths.freecc.parser.tree.*;
+import freecc.Grammar;
+import freecc.parser.tree.*;
 
 /**
  * NFA (Non-deterministic Finite Automaton) code.

@@ -28,14 +28,14 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.visigoths.freecc.lexgen;
+package freecc.lexgen;
 
 import java.util.*;
 
-import org.visigoths.freecc.Grammar;
+import freecc.Grammar;
 
 
-import static org.visigoths.freecc.FreeCCUtils.*;
+import static freecc.FreeCCUtils.*;
 
 /**
  * The state of a Non-deterministic Finite Automaton.

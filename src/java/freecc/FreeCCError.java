@@ -28,11 +28,11 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.visigoths.freecc;
+package freecc;
 
-import static org.visigoths.freecc.FreeCCError.Type.*;
-import org.visigoths.freecc.parser.Node;
-import org.visigoths.freecc.parsegen.Expansion;
+import static freecc.FreeCCError.Type.*;
+import freecc.parser.Node;
+import freecc.parsegen.Expansion;
 
 
 public class FreeCCError {
