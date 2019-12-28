@@ -626,7 +626,7 @@ public class Semanticizer {
             }
             return false;
         } else if (exp instanceof ExpansionSequence) {
-            for (Expansion e : ((ExpansionSequence) exp).getUnits()) {
+            for (Expansion e : Nodes.childrenOfType(exp, Expansion.class)) {
                 if (!emptyExpansionExists(e)) {
                     return false;
                 }
@@ -666,7 +666,7 @@ public class Semanticizer {
                 addLeftMost(prod, e);
             }
         } else if (exp instanceof ExpansionSequence) {
-            for (Expansion e : ((ExpansionSequence) exp).getUnits()) {
+            for (Expansion e : Nodes.childrenOfType(exp, Expansion.class)) {
                 addLeftMost(prod, e);
                 if (!emptyExpansionExists(e)) {
                     break;
@@ -801,9 +801,9 @@ public class Semanticizer {
             return false;
         } else if (exp instanceof ExpansionSequence) {
             ExpansionSequence seq = (ExpansionSequence) exp;
-            for (int i = 0; i < seq.getUnits().size(); i++) {
-                Expansion[] units = (Expansion[]) seq.getUnits()
-                        .toArray(new Expansion[seq.getUnits().size()]);
+            for (int i = 0; i < seq.getChildCount(); i++) {
+                Expansion[] units = Nodes.childrenOfType(seq,  Expansion.class)
+                        .toArray(new Expansion[seq.getChildCount()]);
                 if (units[i] instanceof Lookahead
                         && ((Lookahead) units[i]).isExplicit()) {
                     // An explicit lookahead (rather than one generated
@@ -892,7 +892,7 @@ public class Semanticizer {
                     return;
                 }
                 ExpansionSequence seq = (ExpansionSequence) e;
-                Lookahead la = (Lookahead) (seq.getUnits().get(0));
+                Lookahead la = (Lookahead) seq.getChild(0);
                 if (!la.isExplicit()) {
                     return;
                 }
@@ -906,13 +906,13 @@ public class Semanticizer {
                 seq1.setBeginLine(la.getBeginLine());
                 seq1.setBeginColumn(la.getBeginColumn());
                 seq1.setParentObject(ch);
-                seq1.getUnits().add(la);
+                seq1.addChild(la);
                 la.setParentObject(seq1);
                 Action act = new Action();
                 act.setBeginLine(la.getBeginLine());
                 act.setBeginColumn(la.getBeginColumn());
                 act.setParentObject(seq1);
-                seq1.getUnits().add(act);
+                seq1.addChild(act);
                 ch.addChild(seq1);
                 if (la.getAmount() != 0) {
                     if (la.getSemanticLookahead() != null) {
@@ -939,11 +939,11 @@ public class Semanticizer {
                 // expansion (we use EOF).
                 la.setExpansion(new EndOfFile());
                 la1.setExpansion(new EndOfFile());
-                seq.getUnits().set(0, la1);
+                seq.setChild(0, la1);
                 List<Expansion> newUnits = new ArrayList<Expansion>();
-                newUnits.add(seq.getUnits().remove(0));
+                newUnits.add((Expansion) seq.removeChild(0));
                 newUnits.add(ch);
-                newUnits.addAll(seq.getUnits());
+                newUnits.addAll(Nodes.childrenOfType(seq, Expansion.class));
                 seq.clearChildren();
                 for (Expansion sub : newUnits) {
                     seq.addChild(sub);
@@ -1051,12 +1051,7 @@ public class Semanticizer {
                 return true;
             }
             ExpansionSequence seq = (ExpansionSequence) exp;
-            Expansion e = seq.getUnits().get(0);
-            if (!(e instanceof Lookahead)) {
-                return true;
-            }
-            Lookahead la = (Lookahead) e;
-            return !la.isExplicit();
+            return !seq.getLookahead().isExplicit();
         }
     }
 }

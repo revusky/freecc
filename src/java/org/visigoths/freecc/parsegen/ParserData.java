@@ -141,11 +141,11 @@ public class ParserData {
         for (int i = 0; i < choices.size(); i++) {
             nestedSeq = (ExpansionSequence) (choices.get(i));
             visitExpansion(nestedSeq);
-	    if (nestedSeq.getUnits().isEmpty()) {
+	    if (nestedSeq.isEmpty()) {
 		// TODO: REVISIT
 		break;
 	    }
-            Lookahead l = (Lookahead) nestedSeq.getUnits().get(0);
+            Lookahead l = (Lookahead) nestedSeq.getChild(0);
             if (!l.getAlwaysSucceeds()) {
                 lookaheads.add(l);
             } else {
@@ -251,8 +251,8 @@ public class ParserData {
             // We skip the first element in the following iteration since it is
             // the
             // Lookahead object.
-            for (int i = 1; i < e_nrw.getUnits().size(); i++) {
-                visitExpansion(e_nrw.getUnits().get(i));
+            for (int i = 1; i < e_nrw.getChildCount(); i++) {
+                visitExpansion((Expansion) e_nrw.getChild(i));
             }
         } else if (e instanceof OneOrMore) {
             OneOrMore oom = (OneOrMore) e;
@@ -288,8 +288,8 @@ public class ParserData {
         if (e.getInternalName().equals("")) {
             while (true) {
                 if (seq instanceof ExpansionSequence
-                        && ((ExpansionSequence) seq).getUnits().size() == 2) {
-                    seq = ((ExpansionSequence) seq).getUnits().get(1);
+                        && ((ExpansionSequence) seq).getChildCount() == 2) {
+                    seq = (Expansion) seq.getChild(1);
                 } else if (seq instanceof NonTerminal) {
                     NonTerminal e_nrw = (NonTerminal) seq;
                     ParserProduction ntprod = grammar
@@ -347,8 +347,8 @@ public class ParserData {
             // the
             // Lookahead object.
             int cnt = amt;
-            for (int i = 1; i < e_nrw.getUnits().size(); i++) {
-                Expansion eseq = e_nrw.getUnits().get(i);
+            for (int i = 1; i < e_nrw.getChildCount(); i++) {
+                Expansion eseq = (Expansion) e_nrw.getChild(i);
                 setupPhase3Builds(eseq, cnt);
                 cnt -= minimumSize(eseq);
                 if (cnt <= 0)
@@ -411,8 +411,8 @@ public class ParserData {
             // We skip the first element in the following iteration since it is
             // the
             // Lookahead object.
-            for (int i = 1; i < e_nrw.getUnits().size(); i++) {
-                Expansion eseq = e_nrw.getUnits().get(i);
+            for (int i = 1; i < e_nrw.getChildCount(); i++) {
+                Expansion eseq = (Expansion) e_nrw.getChild(i);
                 int mineseq = minimumSize(eseq);
                 if (min == Integer.MAX_VALUE || mineseq == Integer.MAX_VALUE) {
                     min = Integer.MAX_VALUE; // Adding infinity to something

@@ -1143,24 +1143,24 @@ INJECT(ExpansionSequence) :
    import org.visigoths.freecc.Grammar;
    import org.visigoths.freecc.parsegen.Expansion;
    import org.visigoths.freecc.parsegen.Lookahead;
-   import java.util.List;
+   import java.util.*;
    extends Expansion;
 }
 {
    public ExpansionSequence(Grammar grammar) {
-//       this();
        setGrammar(grammar);
    }
 
    public ExpansionSequence() {}
-   
+
    public List<Expansion> getUnits() {
        return Nodes.childrenOfType(this, Expansion.class);
    }
-   
-//   public Lookahead getLookahead() {
-//       return (Lookahead) getChild(0);
-//   }
+
+   public Lookahead getLookahead() {
+       return (Lookahead) getChild(0);
+   }
+
 }
 
 

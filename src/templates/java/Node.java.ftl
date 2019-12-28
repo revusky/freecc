@@ -39,7 +39,7 @@ import freemarker.template.*;
 
 public interface Node 
 [#if grammar.options.freemarkerNodes]
-   extends TemplateNodeModel, TemplateScalarModel 
+   extends TemplateNodeModel, TemplateScalarModel
 [/#if] {
 
     /** Life-cycle hook method called after the node has been made the current
@@ -77,8 +77,6 @@ public interface Node
      
      void clearChildren();
        
-//     int getNumChildren();
-
      int getChildCount();
      
      // The following 3 methods will typically delegate

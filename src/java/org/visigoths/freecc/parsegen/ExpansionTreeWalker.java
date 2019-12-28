@@ -63,7 +63,7 @@ final class ExpansionTreeWalker {
                     preOrderWalk(exp, opObj);
                 }
             } else if (node instanceof ExpansionSequence) {
-                for (Expansion exp : ((ExpansionSequence) node).getUnits()) {
+                for (Expansion exp : Nodes.childrenOfType(node, Expansion.class)) {
                     preOrderWalk(exp, opObj);
                 }
             } else if (node instanceof OneOrMore || node instanceof ZeroOrMore || node instanceof ZeroOrOne
@@ -71,7 +71,7 @@ final class ExpansionTreeWalker {
                 preOrderWalk(node.getNestedExpansion(), opObj);
             } else if (node instanceof Lookahead) {
                 Expansion nested_e = ((Lookahead) node).getNestedExpansion();
-                if (!(nested_e instanceof ExpansionSequence && (Expansion) (((ExpansionSequence) nested_e).getUnits().get(0)) == node)) {
+                if (!(nested_e instanceof ExpansionSequence && (Expansion) (((ExpansionSequence) nested_e).getLookahead()) == node)) {
                     preOrderWalk(nested_e, opObj);
                 }
             } else if (node instanceof RegexpChoice) {
@@ -105,8 +105,8 @@ final class ExpansionTreeWalker {
                     postOrderWalk(exp, opObj);
                 }
             } else if (node instanceof ExpansionSequence) {
-                for (Expansion exp : ((ExpansionSequence) node).getUnits()) {
-                    postOrderWalk(exp, opObj);
+                for (Expansion exp : Nodes.childrenOfType(node, Expansion.class)) {
+                	postOrderWalk(exp, opObj);
                 }
             } else if (node instanceof OneOrMore) {
                 postOrderWalk(node.getNestedExpansion(), opObj);
@@ -116,7 +116,7 @@ final class ExpansionTreeWalker {
                 postOrderWalk(node.getNestedExpansion(), opObj);
             } else if (node instanceof Lookahead) {
                 Expansion nested_e = ((Lookahead) node).getNestedExpansion();
-                if (!(nested_e instanceof ExpansionSequence && ((ExpansionSequence) nested_e).getUnits().get(0) == node)) {
+                if (!(nested_e instanceof ExpansionSequence && nested_e.getChild(0) == node)) {
                     postOrderWalk(nested_e, opObj);
                 }
             } else if (node instanceof TryBlock) {

@@ -111,8 +111,8 @@ public class Lookahead extends Expansion {
             }
         } else if (exp instanceof ExpansionSequence) {
             ExpansionSequence seq = (ExpansionSequence) exp;
-            for (int i = 0; i < seq.getUnits().size(); i++) {
-                Expansion unit = (Expansion) seq.getUnits().get(i);
+            for (int i = 0; i < seq.getChildCount(); i++) {
+                Expansion unit = (Expansion) seq.getChild(i);
                 // Javacode productions can not have FIRST sets. Instead we
                 // generate the FIRST set
                 // for the preceding LOOKAHEAD (the semantic checks should have
@@ -120,14 +120,14 @@ public class Lookahead extends Expansion {
                 // the LOOKAHEAD is suitable).
                 if (unit instanceof NonTerminal
                         && !(((NonTerminal) unit).prod instanceof BNFProduction)) {
-                    if (i > 0 && seq.getUnits().get(i - 1) instanceof Lookahead) {
-                        Lookahead la = (Lookahead) seq.getUnits().get(i - 1);
+                    if (i > 0 && seq.getChild(i - 1) instanceof Lookahead) {
+                        Lookahead la = (Lookahead) seq.getChild(i - 1);
                         genFirstSet(la.expansion, firstSet);
                     }
                 } else {
-                    genFirstSet(seq.getUnits().get(i), firstSet);
+                    genFirstSet((Expansion)seq.getChild(i), firstSet);
                 }
-                if (!Semanticizer.emptyExpansionExists(seq.getUnits().get(i))) {
+                if (!Semanticizer.emptyExpansionExists((Expansion) seq.getChild(i))) {
                     break;
                 }
             }
@@ -183,13 +183,13 @@ public class Lookahead extends Expansion {
             }
         } else if (exp instanceof ExpansionSequence) {
             ExpansionSequence seq = (ExpansionSequence) exp;
-            Object obj = seq.getUnits().get(0);
+            Object obj = seq.getChild(0);
             if ((obj instanceof Lookahead)
                     && (((Lookahead) obj).semanticLookahead != null)) {
                 return true;
             }
             Expansion previous = null;
-            for (Expansion unit : seq.getUnits()) {
+            for (Expansion unit : Nodes.childrenOfType(seq, Expansion.class)) {
                 // For a Javacode production, we check
                 // the preceding Lookahead object.
                 if (unit instanceof NonTerminal

@@ -91,8 +91,8 @@ public final class LookaheadWalk {
         } else if (exp instanceof ExpansionSequence) {
             List<MatchInfo> v = partialMatches;
             ExpansionSequence seq = (ExpansionSequence) exp;
-            for (int i = 0; i < seq.getUnits().size(); i++) {
-                v = genFirstSet(v, seq.getUnits().get(i));
+            for (Expansion e : Nodes.childrenOfType(seq,  Expansion.class)) {
+                v = genFirstSet(v, e);
                 if (v.size() == 0)
                     break;
             }
@@ -172,8 +172,8 @@ public final class LookaheadWalk {
         } else if (exp.getParentObject() instanceof ExpansionSequence) {
             ExpansionSequence seq = (ExpansionSequence) exp.getParentObject();
             List<MatchInfo> v = partialMatches;
-            for (int i = exp.ordinal + 1; i < seq.getUnits().size(); i++) {
-                v = genFirstSet(v, seq.getUnits().get(i));
+            for (int i = exp.ordinal + 1; i < seq.getChildCount(); i++) {
+                v = genFirstSet(v, (Expansion) seq.getChild(i));
                 if (v.size() == 0)
                     return v;
             }
