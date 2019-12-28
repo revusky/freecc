@@ -35,17 +35,17 @@ OPTIONS : {
   FREEMARKER_NODES;
   SMART_NODE_CREATION;
   BASE_SRC_DIR="../java";
-  PARSER_PACKAGE="org.visigoths.freecc.parser";
-  NODE_PACKAGE="org.visigoths.freecc.parser.tree";
+  PARSER_PACKAGE="freecc.parser";
+  NODE_PACKAGE="freecc.parser.tree";
 }
 
 INJECT(PARSER_CLASS) :
 {
 import java.util.*;
-import org.visigoths.freecc.*;
-import org.visigoths.freecc.lexgen.*;
-import org.visigoths.freecc.parsegen.*;
-import org.visigoths.freecc.parser.tree.*;
+import freecc.*;
+import freecc.lexgen.*;
+import freecc.parsegen.*;
+import freecc.parser.tree.*;
 }
 {
     Grammar grammar;
@@ -282,8 +282,8 @@ INJECT(Identifier) :
 
 INJECT(Token) :
 {
-    import org.visigoths.freecc.Grammar;
-    import static org.visigoths.freecc.parser.FreeCCConstants.*;
+    import freecc.Grammar;
+    import static freecc.parser.FreeCCConstants.*;
 }
 {
     private Grammar grammar;
@@ -337,7 +337,7 @@ INJECT(Token) :
 
 INJECT(interface Node) :
 {
-   import org.visigoths.freecc.Grammar;
+   import freecc.Grammar;
 }
 {
    Grammar getGrammar();
@@ -348,7 +348,7 @@ INJECT(BaseNode) :
 {
     import freemarker.template.*;
     import java.lang.reflect.*;
-    import org.visigoths.freecc.Grammar;
+    import freecc.Grammar;
     implements Node, TemplateHashModel;
 }
 {
@@ -651,7 +651,7 @@ ParserProduction JavaCodeProduction() #ParserProduction :
 
 INJECT(ParserProduction) : 
 {
-   import org.visigoths.freecc.parsegen.Expansion;
+   import freecc.parsegen.Expansion;
    import java.util.List;
    import java.util.ArrayList;
 }
@@ -1055,7 +1055,7 @@ void RegexpSpec(TokenProduction p) #RegexpSpec :
 
 INJECT(RegexpSpec) : 
 {
-   import org.visigoths.freecc.lexgen.RegularExpression;
+   import freecc.lexgen.RegularExpression;
 }
 {
     public String getNextState() {
@@ -1085,7 +1085,7 @@ void ExpansionChoice() :
 
 INJECT(ExpansionChoice) : 
 {
-   import org.visigoths.freecc.parsegen.Expansion;
+   import freecc.parsegen.Expansion;
    import java.util.List;
    import java.util.Collections;
    extends Expansion;
@@ -1140,9 +1140,9 @@ Expansion ExpansionSequence() :
 
 INJECT(ExpansionSequence) : 
 {
-   import org.visigoths.freecc.Grammar;
-   import org.visigoths.freecc.parsegen.Expansion;
-   import org.visigoths.freecc.parsegen.Lookahead;
+   import freecc.Grammar;
+   import freecc.parsegen.Expansion;
+   import freecc.parsegen.Lookahead;
    import java.util.*;
    extends Expansion;
 }
@@ -1230,7 +1230,7 @@ ExplicitLookahead Lookahead() #ExplicitLookahead :
 
 INJECT(ExplicitLookahead) :
 {
-   import org.visigoths.freecc.parsegen.Lookahead;
+   import freecc.parsegen.Lookahead;
    extends Lookahead;
 }
 {
@@ -1352,7 +1352,7 @@ NonTerminal NonTerminal() #NonTerminal :
 
 INJECT(NonTerminal) : 
 {
-    import org.visigoths.freecc.parsegen.*;
+    import freecc.parsegen.*;
     extends Expansion;
 }
 {
@@ -1397,8 +1397,8 @@ ZeroOrOne ZeroOrOne() #ZeroOrOne :
 
 INJECT(ZeroOrOne) : 
 {
-     import org.visigoths.freecc.parsegen.Expansion;
-     import org.visigoths.freecc.parsegen.Lookahead;
+     import freecc.parsegen.Expansion;
+     import freecc.parsegen.Lookahead;
      extends Expansion;
 }
 {
@@ -1429,8 +1429,8 @@ INJECT(ZeroOrOne) :
 
 INJECT(ZeroOrMore) : 
 {
-     import org.visigoths.freecc.parsegen.Expansion;
-     import org.visigoths.freecc.parsegen.Lookahead;
+     import freecc.parsegen.Expansion;
+     import freecc.parsegen.Lookahead;
      extends Expansion;
 }
 {
@@ -1469,8 +1469,8 @@ INJECT(ZeroOrMore) :
 
 INJECT(OneOrMore) : 
 {
-     import org.visigoths.freecc.parsegen.Expansion;
-     import org.visigoths.freecc.parsegen.Lookahead;
+     import freecc.parsegen.Expansion;
+     import freecc.parsegen.Lookahead;
      extends Expansion;
 }
 {
@@ -1533,7 +1533,7 @@ TryBlock TryBlock() :
 INJECT(TryBlock) : 
 {
     import java.util.List;
-    import org.visigoths.freecc.parsegen.Expansion;
+    import freecc.parsegen.Expansion;
     extends Expansion;
 }
 {
@@ -1570,7 +1570,7 @@ Action Action() #Action :
 
 INJECT(Action) :
 {
-   extends org.visigoths.freecc.parsegen.Expansion;
+   extends freecc.parsegen.Expansion;
 }
 {
     public CodeBlock getJavaCode() {
@@ -1651,7 +1651,7 @@ RegexpStringLiteral RegexpStringLiteral() #RegexpStringLiteral :
 
 INJECT(RegexpStringLiteral) : 
 {
-   import org.visigoths.freecc.lexgen.*;
+   import freecc.lexgen.*;
    extends RegularExpression;
 }
 {
@@ -1687,7 +1687,7 @@ RegexpRef RegexpRef() :
 
 INJECT(RegexpRef) : 
 {
-    import org.visigoths.freecc.lexgen.*;
+    import freecc.lexgen.*;
     extends RegularExpression;
 }
 {
@@ -1710,7 +1710,7 @@ void EndOfFile() :
 
 INJECT(EndOfFile) : 
 {
-   extends org.visigoths.freecc.lexgen.RegularExpression;
+   extends freecc.lexgen.RegularExpression;
 }
 {}
 
@@ -1730,7 +1730,7 @@ void RegexpChoiceInParen() #RegexpChoice :
 INJECT(RegexpChoice) : 
 {
     import java.util.List;
-    import org.visigoths.freecc.lexgen.RegularExpression;
+    import freecc.lexgen.RegularExpression;
     extends RegularExpression;
 }
 {
@@ -1758,7 +1758,7 @@ void RegexpSequence() :
 INJECT(RegexpSequence) : 
 {
    import java.util.*;
-   import org.visigoths.freecc.lexgen.RegularExpression;
+   import freecc.lexgen.RegularExpression;
    extends RegularExpression;
 }
 {
@@ -1803,7 +1803,7 @@ int IntegerLiteral() :
 
 INJECT(RepetitionRange) : 
 {
-   import org.visigoths.freecc.lexgen.RegularExpression;
+   import freecc.lexgen.RegularExpression;
    extends RegularExpression;
 }
 {
@@ -1843,7 +1843,7 @@ INJECT(RepetitionRange) :
 
 INJECT(OneOrMoreRegexp) : 
 {
-   import org.visigoths.freecc.lexgen.RegularExpression;
+   import freecc.lexgen.RegularExpression;
    extends RegularExpression;
 }
 {
@@ -1855,7 +1855,7 @@ INJECT(OneOrMoreRegexp) :
 
 INJECT(ZeroOrMoreRegexp) : 
 {
-   import org.visigoths.freecc.lexgen.RegularExpression;
+   import freecc.lexgen.RegularExpression;
    extends RegularExpression;
 }
 {
@@ -1877,7 +1877,7 @@ INJECT(ZeroOrMoreRegexp) :
 
 INJECT(ZeroOrOneRegexp) : 
 {
-   import org.visigoths.freecc.lexgen.RegularExpression;
+   import freecc.lexgen.RegularExpression;
    extends RegularExpression;
 }
 {
@@ -1912,7 +1912,7 @@ CharacterList CharacterList() :
 
 INJECT(CharacterList) : 
 {
-   import org.visigoths.freecc.lexgen.*;
+   import freecc.lexgen.*;
    import java.util.*;
    extends RegularExpression;
 }

@@ -1280,7 +1280,6 @@ INJECT(ObjectType) : {}
 void DiamondOperator() :
 {}
 {
-//   LOOKAHEAD(2)
    "<"
    ">"
 }
@@ -1415,12 +1414,8 @@ INJECT(ThrowsList) :
 Expression Expression() #Expression(>1) :
 {}
 {
-//  (
-//     LOOKAHEAD(LambdaExpression()) LambdaExpression()
-//     |
-     AssignmentExpression()
-//  )
-  {return (Expression) peekNode();}
+    AssignmentExpression()
+    {return (Expression) peekNode();}
 }
 
 INJECT(AssignmentExpression) : {extends Expression}{}
