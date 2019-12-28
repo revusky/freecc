@@ -1280,6 +1280,7 @@ INJECT(ObjectType) : {}
 void DiamondOperator() :
 {}
 {
+//   LOOKAHEAD(2)
    "<"
    ">"
 }
@@ -1288,8 +1289,8 @@ void PossiblyEmptyTypeArguments() #void :
 {
 }
 {
-   LOOKAHEAD("<" ">")
-       DiamondOperator()
+   LOOKAHEAD(2)
+   DiamondOperator()
    |
    TypeArguments()
 }
@@ -1474,56 +1475,57 @@ void AssignmentOperator() #void :
 void TernaryExpression() :
 {}
 {
-  ConditionalOrExpression() [ "?" Expression() ":" Expression() ]
+  ConditionalOrExpression() [ LOOKAHEAD("?") "?" Expression() ":" Expression() ]
 }
 
 void ConditionalOrExpression() :
 {}
 {
-  ConditionalAndExpression() ( "||" ConditionalAndExpression() )*
+  ConditionalAndExpression() ( LOOKAHEAD("||") "||" ConditionalAndExpression() )*
 }
 
 void ConditionalAndExpression():
 {}
 {
-  InclusiveOrExpression() ( "&&" InclusiveOrExpression() )*
+  InclusiveOrExpression() ( LOOKAHEAD("&&") "&&" InclusiveOrExpression() )*
 }
 
 void InclusiveOrExpression():
 {}
 {
-  ExclusiveOrExpression() ( "|" ExclusiveOrExpression() )*
+  ExclusiveOrExpression() ( LOOKAHEAD("|") "|" ExclusiveOrExpression() )*
 }
 
 void ExclusiveOrExpression():
 {}
 {
-  AndExpression() ( "^" AndExpression() )*
+  AndExpression() ( LOOKAHEAD("^") "^" AndExpression() )*
 }
 
 void AndExpression():
 {}
 {
-  EqualityExpression() ( "&" EqualityExpression() )*
+  EqualityExpression() ( LOOKAHEAD("&") "&" EqualityExpression() )*
 }
 
 void EqualityExpression():
 {}
 {
-  InstanceOfExpression() ( ( "==" | "!=" ) InstanceOfExpression() )*
+  InstanceOfExpression() ( LOOKAHEAD(1) ( "==" | "!=" ) InstanceOfExpression() )*
 }
 
 void InstanceOfExpression():
 {}
 {
-  RelationalExpression() [ "instanceof" Type() ]
+  RelationalExpression() [ LOOKAHEAD(1) "instanceof" Type() ]
 }
 
 void RelationalExpression():
 {}
 {
   ShiftExpression() 
-  ( 
+  (
+    LOOKAHEAD(1)
     ( 
      "<" 
      | ">" 
@@ -1588,13 +1590,13 @@ void ShiftOperator() #void :
 void AdditiveExpression():
 {}
 {
-  MultiplicativeExpression() ( ( "+" | "-" ) MultiplicativeExpression() )*
+  MultiplicativeExpression() ( LOOKAHEAD(1) ( "+" | "-" ) MultiplicativeExpression() )*
 }
 
 void MultiplicativeExpression():
 {}
 {
-  UnaryExpression() ( ( "*" | "/" | "%" ) UnaryExpression() )*
+  UnaryExpression() ( LOOKAHEAD(1) ( "*" | "/" | "%" ) UnaryExpression() )*
 }
 
 void UnaryExpression():
@@ -1920,7 +1922,7 @@ void BlockStatement() #void :
   LOOKAHEAD( Modifiers() Type() <IDENTIFIER> )
   LocalVariableDeclaration() ";"
   |
-  Statement()
+  LOOKAHEAD(Statement()) Statement()
   |
   LOOKAHEAD( Modifiers() "class")
   Modifiers() ClassDeclaration()
