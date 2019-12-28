@@ -193,7 +193,7 @@
 [#macro BuildPhase1Code expansion]
     [#var classname=expansion.class.name?split(".")?last]
     [#if classname = "Action"]
-       ${expansion.javaCode}
+       ${expansion.javaCode!"{}"}
     [#elseif classname = "ExpansionSequence"]
 	   [#list expansion.units as subexp]
 	     [#if subexp_index != 0]
