@@ -1,4 +1,6 @@
-# FreeCC Parser Generator 0.9.4 preview 
+# FreeCC Parser Generator 0.9.4 
+
+Tagged and Released, 28 December 2019
 
 I (revusky) decided to dust off this old unfinished open source project, abandoned since early 2009. 
 
@@ -10,11 +12,11 @@ The original intention was not to fork a new project, but to contribute all of t
 
 ## Changes in the new resuscitated codebase
 
-As of this writing, I have added tweaked the grammar to support the additions to the Java language up until Java 7. (I think I have, though it requires more formal testing.) I also fixed some various bugs that were there relating to much older additions to the language, specifically problems with properly parsing Generics syntax and also there was as bug with Enums.
+I have marked this as a milestone because I finally got the Java grammar updated to support the new constructs, I believe up through Java 8. I have tested this on a huge body of java source, including the thousands of files of Java source code in the JDK and in open source projects such as JRuby, Jython, and FreeMarker, and this java parser can handle all of it. Literally millions of lines of code.
 
-The main new thing that FreeCC does not (yet) support is Lambda expressions. I intend to remedy this fairly soon.
+The included Java grammar is useful on it own and also is embedded in the FreeCC grammar, so FreeCC can handle Lambda expressions, which, as far as I know, JavaCC still cannot do.
 
-FreeCC is not very well documented at the moment. There is some rudimentary information on the [archived GoogleCode site](https://code.google.com/archive/p/freecc/wikis)
+FreeCC is not very well documented at the moment. There is some rudimentary information on the [Wiki pages associated with the project on Github](https://github.com/revusky/freecc/wiki). However, I consider that to be a stopgap measure and would like to have something more like real documentation.
 
 It should be possible to check the code out and just do an ant build from the top directory, by just running ant. You should also be able to run a little test suite by running "ant test".
 
