@@ -73,10 +73,5 @@
         <delete dir="examples/freemarker/fel"/>
         <delete dir="examples/freemarker/ftl"/>
         <delete dir="src/java/freecc/parser"/>
-    <!-- delete>
-      <fileset dir="src/java/freecc/parser">
-         <include name="**/*.java"/>
-      </fileset>
-    </delete -->
-  </target>
+      </target>
 </project>

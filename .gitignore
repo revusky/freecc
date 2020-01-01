@@ -2,7 +2,7 @@
 /build/*
 /test.tmp/*
 /freecc.jar
-/src/java/org/visigoths/freecc/parser/*
+/src/java/freecc/parser/*
 /examples/freemarker/ftl/*
 /examples/freemarker/fel/*
 /examples/java/javagrammar/*
