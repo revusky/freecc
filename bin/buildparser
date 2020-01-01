@@ -1,0 +1,2 @@
+cd $(dirname $0)
+./freecc ../src/grammars/FreeCC.freecc 
