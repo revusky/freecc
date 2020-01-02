@@ -53,9 +53,20 @@ INJECT(JavaParser) :
            Nodes.dump(root, "");
        }
    }
+
+   static public void addFilesRecursively(List<File> files, File file) {
+       if (file.isDirectory()) {
+           for (File f : file.listFiles()) {
+	         addFilesRecursively(files, f);
+	   }
+       }
+       else if (file.getName().endsWith("java")) {
+           files.add(file);
+       }
+   }
    
    
-   public static void main(String args[]) {
+   static public void main(String args[]) {
       List<File> failures = new ArrayList<File>();
       List<File> successes = new ArrayList<File>();    
       boolean failureOccurred = false;
@@ -70,32 +81,20 @@ INJECT(JavaParser) :
               System.err.println("File " + file + " does not exist.");
               continue;
           }
-          if (file.isDirectory()) {
-              for (File f : file.listFiles()) {
-                 if (f.getName().endsWith(".java")) {
-                    files.add(f);
-                }
-            }
-        } else {
-            files.add(file);
-        }
+	   addFilesRecursively(files, file);
       }
-
       for (File file : files) {
           try {
              // A bit screwball, we'll dump the tree if there is only one arg. :-)
-              parseFile(file, files.size()==1);
+              parseFile(file, files.size() == 1);
           } 
           catch (Exception e) {
               System.err.println("Error processing file: " + file);
               e.printStackTrace();
-              failureOccurred = true;
-	      failures.add(file);
               continue;
           }
-          if (files.size() >1)
-              System.out.println(file.getName()  + " parsed successfully.");
-	      successes.add(file);
+          System.out.println(file.getName()  + " parsed successfully.");
+          successes.add(file);
        }
        for (File file : failures) {
            System.out.println("Parse failed on: " + file);
@@ -105,7 +104,8 @@ INJECT(JavaParser) :
     }
       
    static public void usage() {
-       System.out.println("Usage: java javagrammar.JavaParser <sourcefiles>");
+       System.out.println("Usage: java javagrammar.JavaParser <sourcefiles or directories>");
+       System.out.println("If you just pass it one java source file, it dumps the AST");
        System.exit(-1);
    }
 }
