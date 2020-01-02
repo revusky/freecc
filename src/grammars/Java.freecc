@@ -60,7 +60,7 @@ INJECT(JavaParser) :
 	         addFilesRecursively(files, f);
 	   }
        }
-       else if (file.getName().endsWith("java")) {
+       else if (file.getName().endsWith("java") && !file.getName().endsWith("-info.java")) {
            files.add(file);
        }
    }
@@ -91,6 +91,7 @@ INJECT(JavaParser) :
           catch (Exception e) {
               System.err.println("Error processing file: " + file);
               e.printStackTrace();
+	      failures.add(file);
               continue;
           }
           System.out.println(file.getName()  + " parsed successfully.");
