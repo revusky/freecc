@@ -83,6 +83,7 @@ INJECT(JavaParser) :
           }
 	   addFilesRecursively(files, file);
       }
+      long startTime = System.currentTimeMillis();
       for (File file : files) {
           try {
              // A bit screwball, we'll dump the tree if there is only one arg. :-)
@@ -100,8 +101,9 @@ INJECT(JavaParser) :
        for (File file : failures) {
            System.out.println("Parse failed on: " + file);
        }
-       System.out.println("Parsed " + successes.size() + " files successfully");
+       System.out.println("\nParsed " + successes.size() + " files successfully");
        System.out.println("Failed on " + failures.size() + " files.");
+       System.out.println("\nDuration: " + (System.currentTimeMillis() - startTime) + " milliseconds");
     }
       
    static public void usage() {
