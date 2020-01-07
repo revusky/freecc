@@ -163,6 +163,10 @@ public class FilesGenerator {
     }
     
     void outputJavaFile(String code, File outputFile) throws IOException, TemplateException {
+        File dir = outputFile.getParentFile();
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
         FileWriter out = new FileWriter(outputFile);
         CompilationUnit jcu = null;
         try {
